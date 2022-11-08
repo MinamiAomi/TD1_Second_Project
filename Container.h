@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "DataStruct.h"
 #include "Map.h"
+#include "PlayerMain.h"
 
 class Container {
 
@@ -21,6 +22,8 @@ private:
 		ParticleData particle = {};
 		
 		Map::InitData map = {};
+
+		Player::InitData player = {};
 	};
 
 private:
@@ -34,6 +37,7 @@ public:
 	const EffectData& getEffectData() const { return mGameData.effect; }
 	const ParticleData& getParticleData() const { return mGameData.particle; }
 	const Map::InitData& getMapData() const { return mGameData.map; }
+	const Player::InitData& getPlayerData() const { return mGameData.player; }
 
 public:
 	Container();

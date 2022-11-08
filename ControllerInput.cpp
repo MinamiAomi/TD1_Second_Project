@@ -8,7 +8,7 @@ Controller* Controller::GetInstance() {
 	return &instance;
 }
 
-bool Controller::IsUse(const State& data) const {
+bool Controller::isUse(const State& data) const {
 	return data.state.Gamepad.wButtons != 0 ||
 		data.state.Gamepad.bRightTrigger != 0 ||
 		data.state.Gamepad.bLeftTrigger != 0 ||
@@ -25,7 +25,7 @@ void Controller::SetState(){
 		it.preState = it.state;
 		it.isConnect =  XInputGetState(n++, &it.state) == ERROR_SUCCESS;
 		if (it.isConnect == true) {
-			if (IsUse(it)) {
+			if (isUse(it)) {
 				mIsInput = true;
 			}
 		}
@@ -34,7 +34,7 @@ void Controller::SetState(){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Controller::SetTriggerDeadZone(int index, int deadzone) {
+bool Controller::setTriggerDeadZone(int index, int deadzone) {
 	if (index < mData.size()) {
 		mData[index].triggerDeadZone = deadzone;
 		return true;
@@ -42,7 +42,7 @@ bool Controller::SetTriggerDeadZone(int index, int deadzone) {
 	return false;
 }
 
-bool Controller::SetRightStickDeadZone(int index, int deadzone) {
+bool Controller::setRightStickDeadZone(int index, int deadzone) {
 	if (index < mData.size()) {
 		mData[index].rightStickDeadZone = deadzone;
 		return true;
@@ -50,7 +50,7 @@ bool Controller::SetRightStickDeadZone(int index, int deadzone) {
 	return false;
 }
 
-bool Controller::SetLeftStickDeadZone(int index, int deadzone) {
+bool Controller::setLeftStickDeadZone(int index, int deadzone) {
 	if (index < mData.size()) {
 		mData[index].leftStickDeadZone = deadzone;
 		return true;
@@ -60,16 +60,16 @@ bool Controller::SetLeftStickDeadZone(int index, int deadzone) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Controller::IsTriggerButton(int index, Button button) const {
+bool Controller::isTrigger(int index, ControllerButton button) const {
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			switch (button)
 			{
-			case Controller::kLeftTrigger: // 左トリガー
+			case kControllerLeftTrigger: // 左トリガー
 				return (mData[index].state.Gamepad.bLeftTrigger > mData[index].triggerDeadZone) &&
 					!(mData[index].preState.Gamepad.bLeftTrigger > mData[index].triggerDeadZone);
 			
-			case Controller::kRightTrigger: // 右トリガー
+			case kControllerRightTrigger: // 右トリガー
 				return (mData[index].state.Gamepad.bRightTrigger > mData[index].triggerDeadZone) &&
 					!(mData[index].preState.Gamepad.bRightTrigger > mData[index].triggerDeadZone);
 
@@ -83,15 +83,15 @@ bool Controller::IsTriggerButton(int index, Button button) const {
 	return false;
 }
 
-bool Controller::IsPressedButton(int index, Button button) const {
+bool Controller::isPressed(int index, ControllerButton button) const {
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			switch (button)
 			{
-			case Controller::kLeftTrigger: // 左トリガー
+			case kControllerLeftTrigger: // 左トリガー
 				return (mData[index].state.Gamepad.bLeftTrigger > mData[index].triggerDeadZone);
 			
-			case Controller::kRightTrigger: // 右トリガー
+			case kControllerRightTrigger: // 右トリガー
 				return (mData[index].state.Gamepad.bRightTrigger > mData[index].triggerDeadZone);
 				
 			default: // その他ボタン
@@ -103,16 +103,16 @@ bool Controller::IsPressedButton(int index, Button button) const {
 	return false;
 }
 
-bool Controller::IsReleaseButton(int index, Button button) const {
+bool Controller::isRelease(int index, ControllerButton button) const {
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			switch (button)
 			{
-			case Controller::kLeftTrigger: // 左トリガー
+			case kControllerLeftTrigger: // 左トリガー
 				return !(mData[index].state.Gamepad.bLeftTrigger > mData[index].triggerDeadZone) &&
 					(mData[index].preState.Gamepad.bLeftTrigger > mData[index].triggerDeadZone);
 				
-			case Controller::kRightTrigger: // 右トリガー
+			case kControllerRightTrigger: // 右トリガー
 				return !(mData[index].state.Gamepad.bRightTrigger > mData[index].triggerDeadZone) &&
 					(mData[index].preState.Gamepad.bRightTrigger > mData[index].triggerDeadZone);
 				
@@ -126,33 +126,33 @@ bool Controller::IsReleaseButton(int index, Button button) const {
 	return false;
 }
 
-bool Controller::IsStickDirection(int index, StickDirection direction) const {
+bool Controller::isStickDirection(int index, StickDirection direction) const {
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			switch (direction)
 			{
-			case Controller::kLeftStickDirectionUp:
+			case kLeftStickDirectionUp:
 				return mData[index].state.Gamepad.sThumbLY >= mData[index].leftStickDeadZone ? true : false;
 
-			case Controller::kLeftStickDirectionDown:
+			case kLeftStickDirectionDown:
 				return mData[index].state.Gamepad.sThumbLY <= -mData[index].leftStickDeadZone ? true : false;
 
-			case Controller::kLeftStickDirectionRight:
+			case kLeftStickDirectionRight:
 				return mData[index].state.Gamepad.sThumbLX >= mData[index].leftStickDeadZone ? true : false;
 
-			case Controller::kLeftStickDirectionLeft:
+			case kLeftStickDirectionLeft:
 				return mData[index].state.Gamepad.sThumbLX <= -mData[index].leftStickDeadZone ? true : false;
 
-			case Controller::kRightStickDirectionUp:
+			case kRightStickDirectionUp:
 				return mData[index].state.Gamepad.sThumbLY >= mData[index].rightStickDeadZone ? true : false;
 
-			case Controller::kRightStickDirectionDown:
+			case kRightStickDirectionDown:
 				return mData[index].state.Gamepad.sThumbLY <= -mData[index].rightStickDeadZone ? true : false;
 
-			case Controller::kRightStickDirectionRight:
+			case kRightStickDirectionRight:
 				return mData[index].state.Gamepad.sThumbLX >= mData[index].rightStickDeadZone ? true : false;
 
-			case Controller::kRightStickDirectionLeft:
+			case kRightStickDirectionLeft:
 				return mData[index].state.Gamepad.sThumbLX <= -mData[index].rightStickDeadZone ? true : false;
 			default:
 				break;
@@ -164,7 +164,7 @@ bool Controller::IsStickDirection(int index, StickDirection direction) const {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Controller::GetRightTrigger(int index, int& out) const {
+bool Controller::getRightTrigger(int index, int& out) const {
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			if (mData[index].state.Gamepad.bRightTrigger > mData[index].triggerDeadZone) {
@@ -178,7 +178,7 @@ bool Controller::GetRightTrigger(int index, int& out) const {
 	return false;
 }
 
-bool Controller::GetLeftTrigger(int index, int& out) const {
+bool Controller::getLeftTrigger(int index, int& out) const {
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			if (mData[index].state.Gamepad.bLeftTrigger > mData[index].triggerDeadZone){
@@ -195,7 +195,7 @@ bool Controller::GetLeftTrigger(int index, int& out) const {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Controller::GetRightStick(int index, int& outx, int& outy) const {
+bool Controller::getRightStick(int index, int& outx, int& outy) const {
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			if ((mData[index].state.Gamepad.sThumbRX <  mData[index].rightStickDeadZone &&
@@ -217,18 +217,18 @@ bool Controller::GetRightStick(int index, int& outx, int& outy) const {
 	}
 	return false;
 }
-bool Controller::GetRightStick(int index, float& outx, float& outy) const {
+bool Controller::getRightStick(int index, float& outx, float& outy) const {
 	int x, y;
-	bool is = GetRightStick(index, x, y);
+	bool is = getRightStick(index, x, y);
 	outx = (float)x;
 	outy = (float)y;
 	return is;
 }
-bool Controller::GetRightStick(int index, StickMagnitude& out) const {
-	return GetRightStick(index, out.x, out.y);
+bool Controller::getRightStick(int index, StickMagnitude& out) const {
+	return getRightStick(index, out.x, out.y);
 }
 
-bool Controller::GetLeftStick(int index, int& outx, int& outy) const {
+bool Controller::getLeftStick(int index, int& outx, int& outy) const {
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			if ((mData[index].state.Gamepad.sThumbLX <  mData[index].leftStickDeadZone &&
@@ -250,15 +250,15 @@ bool Controller::GetLeftStick(int index, int& outx, int& outy) const {
 	}
 	return false;
 }
-bool Controller::GetLeftStick(int index, float& outx, float& outy) const {
+bool Controller::getLeftStick(int index, float& outx, float& outy) const {
 	int x, y;
-	bool is = GetLeftStick(index, x, y);
+	bool is = getLeftStick(index, x, y);
 	outx = (float)x;
 	outy = (float)y;
 	return is;
 }
-bool Controller::GetLeftStick(int index, StickMagnitude& out) const {
-	return GetLeftStick(index, out.x, out.y);
+bool Controller::getLeftStick(int index, StickMagnitude& out) const {
+	return getLeftStick(index, out.x, out.y);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

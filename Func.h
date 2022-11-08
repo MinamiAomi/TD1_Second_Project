@@ -37,4 +37,8 @@ namespace Func {
 	inline float Random() {
 		return (float)rand() / RAND_MAX;
 	}
+
+	inline float Random(float min, float max) {
+		return 	min + (max - min) * Random();
+	}
 }

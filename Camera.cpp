@@ -80,14 +80,12 @@ void Camera::CalcData() {
 	mInverseMatrix = Matrix33::MakeInverse(mMatrix);
 }
 
-void Camera::setMousePosition() {
+#ifdef _DEBUG
+void Camera::debugMousePosition() {
 	int x = 0, y = 0;
 	Novice::GetMousePosition(&x, &y);
 	Vec2 tmp((float)x, (float)y);
-	mPreMousePosition = mMousePosition;
-	mMousePosition = tmp * mInverseMatrix;
 
-#ifdef _DEBUG
 	dPreMousePosition = dCurMousePosition;
 	dCurMousePosition = { tmp.x, (tmp.y - 720) * -1 };
 #endif // _DEBUG

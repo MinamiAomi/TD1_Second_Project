@@ -28,19 +28,19 @@ public:
 	}
 
 	// キーが押された時
-	bool IsTrigger(char keycode) const {
+	bool isTrigger(char keycode) const {
 		return mPreKeys[keycode] == 0 && mKeys[keycode] != 0;
 	}
 	// キーを押しているとき
-	bool IsPressed(char keycode) const {
+	bool isPressed(char keycode) const {
 		return mKeys[keycode] != 0;
 	}
 	// キーを離したとき
-	bool IsRelease(char keycode) const {
+	bool isRelease(char keycode) const {
 		return mPreKeys[keycode] != 0 && mKeys[keycode] == 0;
 	}
 
-	bool IsInput() const {
+	bool isInput() const {
 		return mIsInput;
 	}
 

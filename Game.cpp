@@ -2,8 +2,7 @@
 #include <Novice.h>
 #include "Func.h"
 #include "Container.h"
-#include "Key.h"
-#include "ControllerInput.h"
+#include "InputDevice.h"
 #include "DeltaTime.h"
 #include "Scene.h"
 #include "TitleScene.h"
@@ -11,6 +10,7 @@
 #include "Camera.h"
 #include "EffectManager.h"
 #include "Map.h"
+#include "PlayerMain.h"
 
 #ifdef _DEBUG
 #include "Debug.h"
@@ -34,16 +34,15 @@ void Game::Run() {
 		mDeltaTime->CalcDeltaTime();
 		// フレームの開始
 		Novice::BeginFrame();
-		mKey->SetState();
-		mController->SetState();
-		mCamera->setMousePosition();
-
-		mUseController = mController->IsInput() ? true : mUseController;
-		mUseController = mKey->IsInput() ? false : mUseController;
+		mInput->SetState();
+#ifdef _DEBUG
+		mCamera->debugMousePosition();
+#endif
+		
 	
 #ifdef _DEBUG
 		Debug::PrintCountReset();
-		if (mKey->IsTrigger(DIK_TAB)) {
+		if (mInput->getKey()->isTrigger(DIK_TAB)) {
 			_debugMode ^= true;
 		}
 		if (_debugMode) {
@@ -68,7 +67,7 @@ void Game::Run() {
 			Novice::SetBlendMode(kBlendModeAdd);
 			mCamera->DrawCircle({ mCamera->getWorldPosition(), 5}, RED); // ワールド座標の点
 			mCamera->DrawCircle({ mContainer->getCameraData().worldPosition, 5}, GREEN); // カメラ初期位置座標の点
-			mCamera->DrawCircle({ mCamera->getMousePosition(), 5 }, BLUE); // マウスの座標の点
+			mCamera->DrawCircle({ mInput->getMouse()->getPosition(), 5}, BLUE); // マウスの座標の点
 			Novice::SetBlendMode(kBlendModeNormal);
 		}
 #endif // _DEBUG
@@ -92,9 +91,7 @@ void Game::Initialize() {
 		mContainer->getWindow().kHeight);
 	
 	mContainer->Load();
-
-	mKey = Key::GetInstance();
-	mController = Controller::GetInstance();
+	mInput = new InputDevice(this);
 	mDeltaTime = DeltaTime::GetInstance();
 
 	mScenes[kTitleScene] = mTitleScenePtr = new TitleScene(this);
@@ -103,11 +100,13 @@ void Game::Initialize() {
 	mCamera = new Camera(this);
 	mEffectManager = new EffectManager(this);
 	mMap = new Map(this);
+	mPlayer = new Player(this);
 	// 背景は黒
 	Novice::SetClearColor(mContainer->getWindow().kClearColor);
 }
 
 void Game::Finalize() {
+	Func::SafeDelete(mPlayer);
 	Func::SafeDelete(mMap);
 	Func::SafeDelete(mEffectManager);
 	Func::SafeDelete(mCamera);
@@ -116,6 +115,7 @@ void Game::Finalize() {
 	for (auto scene : mScenes) {
 		Func::SafeDelete(scene);
 	}
+	Func::SafeDelete(mInput);
 	Novice::Finalize();
 	Func::SafeDelete(mContainer);
 }
@@ -127,6 +127,8 @@ void Game::ObjCreate() {
 	mCamera->Create();
 	mEffectManager->Create();
 	mMap->Create();
+	mPlayer->Create();
+
 }
 
 #ifdef _DEBUG

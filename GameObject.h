@@ -4,11 +4,14 @@
 #define ACCESS_PTR
 
 #define CONTAINER getGame()->getContainer()
-#define KEY getGame()->getKey()
-#define CONTROLLER getGame()->getController()
+#define INPUT_DEV getGame()->getInput()
+#define KEY getGame()->getInput()->getKey()
+#define CONTROLLER getGame()->getInput()->getController()
+#define MOUSE getGame()->getInput()->getMouse()
 #define DELTA_TIME getGame()->getDeltaTime()
 #define CAMERA getGame()->getCamera()
 #define MAP getGame()->getMap()
+#define PLAYER getGame()->getPlayer()
 
 #endif // !ACCESS_PTR
 

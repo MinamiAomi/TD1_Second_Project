@@ -32,12 +32,22 @@ void Container::LoadData() {
 	LoadMapCSV();
 	mGameData.map.mapWidth = mGameData.map.chipSize * mGameData.map.chipRowNum;
 	mGameData.map.mapHeight = mGameData.map.chipSize * mGameData.map.chipColmunNum;
+
+	mGameData.player.image.left = 0;
+	mGameData.player.image.top = 0;
+	mGameData.player.image.width = 256;
+	mGameData.player.image.height = 256;
+	mGameData.player.position = { 300,300 };
+	mGameData.player.size = { 48,64 };
+	mGameData.player.mapColliderSize = { 32,64 };
 }
 
 void Container::LoadImages() {
 	mGameData.particle.fadeStraight.image.handle = Novice::LoadTexture("./resource/images/partical2.png");
 	mGameData.map.chipImageHandle[kChipTypeNone] = -1;
 	mGameData.map.chipImageHandle[kChipTypeBlock] = Novice::LoadTexture("./resource/images/chipBlock.png");
+
+	mGameData.player.image.handle = Novice::LoadTexture("white1x1.png");
 }
 
 void Container::LoadMapCSV() {

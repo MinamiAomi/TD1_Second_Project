@@ -12,11 +12,8 @@ public:
 
 private:
 
-	bool mUseController = false;
-
 	class Container* mContainer = nullptr; // コンテナ
-	class Key* mKey = nullptr; // キーボード
-	class Controller* mController = nullptr; // コントローラー
+	class InputDevice* mInput = nullptr;
 	class DeltaTime* mDeltaTime = nullptr; // デルタタイム
 
 	SceneId mCurrentSceneId = kTitleScene; // 現在のシーン
@@ -27,19 +24,23 @@ private:
 	class Camera* mCamera = nullptr;
 	class EffectManager* mEffectManager = nullptr;
 	class Map* mMap = nullptr;
+	class Player* mPlayer = nullptr;
 	// ゲッター類
 public:
-	bool getUseController() const { return mUseController; }
 
 	const class Container* getContainer() const { return mContainer; }
-	const class Key* getKey() const { return mKey; }
-	const class Controller* getController() const { return mController; }
+	const class InputDevice* getInput() const { return mInput; }
+	class InputDevice* getInput() { return mInput; }
+
 	const class DeltaTime* getDeltaTime() const { return mDeltaTime; }
+	 class DeltaTime* getDeltaTime() { return mDeltaTime; }
+
 	class TitleScene* getTitleScen() { return mTitleScenePtr; }
 	class MainScene* getMainScen() { return mMainScenePtr; }
 	class Camera* getCamera() { return mCamera; }
 	class EffectManager* getEffectManager() { return mEffectManager; }
 	class Map* getMap() { return mMap; }
+	class Player* getPlayer() { return mPlayer; }
 
 public:
 	Game();

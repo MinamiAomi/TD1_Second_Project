@@ -1,7 +1,7 @@
 #include "MainScene.h"
 #include "Game.h"
 #include "Camera.h"
-#include "Key.h"
+#include "InputDevice.h"
 
 void MainScene::Create() {
 
@@ -25,7 +25,7 @@ void MainScene::Draw() {
 }
 
 void MainScene::NextScene() {
-	if (getGame()->getKey()->IsTrigger(DIK_T)) {
+	if (KEY->isTrigger(DIK_T)) {
 		getGame()->ChangeScene(Game::kTitleScene);
 	}
 }

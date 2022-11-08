@@ -68,7 +68,15 @@ public:
 		return { leftTop + vec, width,height };
 	}
 
-	
+	static Rect CreateCenter(float sizex, float sizey) {
+		return { {-sizex / 2.0f,sizey / 2.0f},sizex,sizey };
+	}
+	static Rect CreateCenter(float size) {
+		return CreateCenter(size, size);
+	}
+	static Rect CreateCenter(const Vec2& size) {
+		return CreateCenter(size.x, size.y);
+	}
 
 
 	ShapeType getType() const { return kShapeTypeRect; }

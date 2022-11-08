@@ -25,14 +25,10 @@ private:
 	Matrix33 mInverseMatrix;
 	Rect mDrawArea;
 
-	Vec2 mPreMousePosition;
-	Vec2 mMousePosition;
 public:
 	const Vec2& getWorldPosition() const { return mWorldPosition; }
 	float getScale() const { return mScale; }
 	float getTheta() const { return mTheta; }
-	const Vec2& getMousePosition() const { return mMousePosition; }
-	const Vec2& getPreMousePosition() const { return mPreMousePosition; }
 	const Matrix33& getMatrix() const { return mMatrix; }
 	const Matrix33& getInverseMatrix() const { return mInverseMatrix; }
 
@@ -40,8 +36,6 @@ public:
 	void setWorldPosition(const Vec2& pos) { mWorldPosition = pos; }
 	void setScale(float sca) { mScale = sca; }
 	void setTheta(float the) { mTheta = the; }
-
-	void setMousePosition();
 
 	const Rect& getDrawArea() const { return mDrawArea; }
 
@@ -72,6 +66,7 @@ public:
 	void DrawQuad(const Quad& quad, const ImageData& image, unsigned int color = WHITE) const;
 
 #ifdef _DEBUG
+	void debugMousePosition();
 private:
 	Vec2 dCurMousePosition;
 	Vec2 dPreMousePosition;

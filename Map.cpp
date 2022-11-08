@@ -1,7 +1,7 @@
 #include "Map.h"
 #include "Game.h"
 #include "Container.h"
-#include "Key.h"
+#include "InputDevice.h"
 
 
 #ifdef _DEBUG
@@ -27,7 +27,7 @@ void Map::Create() {
 
 void Map::Update() {
 #ifdef _DEBUG
-	if (KEY->IsTrigger(DIK_SPACE)) {
+	if (KEY->isTrigger(DIK_SPACE)) {
 		LoadMapData();
 	}
 #endif // _DEBUG
@@ -66,7 +66,7 @@ void Map::Draw() {
 	if (Game::_debugMode) {
 		Debug::Print("Raw     %d  |  %d", rawMin, rawMax);
 		Debug::Print("Column  %d  |  %d", colMin, colMax);
-		Vec2 mouse = CAMERA->getMousePosition();
+		Vec2 mouse = MOUSE->getPosition();
 		int raw = getChipRow(mouse.x);
 		int col = getChipColmun(mouse.y);
 		Debug::Print("MousePos %d : %d  |  %d", raw, col, (int)getChipType(raw, col));

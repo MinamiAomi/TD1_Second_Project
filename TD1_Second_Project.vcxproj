@@ -106,12 +106,16 @@
     <ClCompile Include="ControllerInput.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="InputDevice.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="NormalEffect.cpp" />
     <ClCompile Include="FadeStraightParticle.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="PlayerMain.cpp" />
+    <ClCompile Include="PlayerStateWait.cpp" />
     <ClCompile Include="SizeComponent.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
@@ -158,10 +162,12 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ImageData.h" />
+    <ClInclude Include="InputDevice.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Lerp.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="Matrix33.h" />
@@ -169,6 +175,9 @@
     <ClInclude Include="FadeStraightParticle.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleComponent.h" />
+    <ClInclude Include="PlayerMain.h" />
+    <ClInclude Include="PlayerStateBase.h" />
+    <ClInclude Include="PlayerStateWait.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Animation.h" />
