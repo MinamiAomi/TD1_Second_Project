@@ -37,9 +37,21 @@ void Container::LoadData() {
 	mGameData.player.image.top = 0;
 	mGameData.player.image.width = 256;
 	mGameData.player.image.height = 256;
-	mGameData.player.position = { 300,300 };
+	mGameData.player.position = { 600,500 };
 	mGameData.player.size = { 48,64 };
 	mGameData.player.mapColliderSize = { 32,64 };
+
+	mGameData.player.movementJerk = 300.0f;
+	mGameData.player.jumpForce = 1000.0f; 
+	mGameData.player.gravity = -45.0f;
+	mGameData.player.wallKickForce = 800.0f;
+	mGameData.player.wallFriction = 0.6f;
+	mGameData.player.airMoveDecay = 0.8f;
+	mGameData.player.moveFriction = 0.9f;
+	mGameData.player.moveSpeedMax = 300.0f;
+	mGameData.player.dushAttakSpeed = 50000.0f;
+	mGameData.player.dushAttakDistance = 250.0f;
+	mGameData.player.dushAttakCoolTime = 1.5f;
 }
 
 void Container::LoadImages() {

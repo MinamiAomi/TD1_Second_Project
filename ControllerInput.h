@@ -164,7 +164,7 @@ public:
 	/// <param name="number">コントローラー番号</param>
 	/// <param name="out">0～255</param>
 	/// <returns>成功　or　失敗</returns>
-	bool getRightTrigger(int index, int& out) const;
+	bool getRightTrigger(int index, int* out) const;
 
 	/// <summary>
 	/// 左トリガー
@@ -172,7 +172,7 @@ public:
 	/// <param name="number">コントローラー番号</param>
 	/// <param name="out">0～255</param>
 	/// <returns>成功　or　失敗</returns>
-	bool getLeftTrigger(int index, int& out) const;
+	bool getLeftTrigger(int index, int* out) const;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -183,9 +183,12 @@ public:
 	/// <param name="outx">X軸</param>
 	/// <param name="outy">Y軸</param>
 	/// <returns>成功　or　失敗</returns>
-	bool getRightStick(int index, int& outx, int& outy) const;
-	bool getRightStick(int index, float& outx, float& outy) const;
-	bool getRightStick(int index, StickMagnitude& out) const;
+	bool getRightStick(int index, int* outx, int* outy) const;
+	bool getRightStick(int index, float* outx, float* outy) const;
+	bool getRightStick(int index, StickMagnitude* out) const;
+
+	bool getRightStickNoDeadZone(int index, int* outx, int* outy) const;
+	bool getRightStickNoDeadZone(int index, float* outx, float* outy) const;
 
 	/// <summary>
 	/// 左スティック
@@ -194,10 +197,12 @@ public:
 	/// <param name="outx">X軸</param>
 	/// <param name="outy">Y軸</param>
 	/// <returns>成功　or　失敗</returns>
-	bool getLeftStick(int index, int& outx, int& outy) const;
-	bool getLeftStick(int index, float& outx, float& outy) const;
-	bool getLeftStick(int index, StickMagnitude& out) const;
+	bool getLeftStick(int index, int* outx, int* outy) const;
+	bool getLeftStick(int index, float* outx, float* outy) const;
+	bool getLeftStick(int index, StickMagnitude* out) const;
 
+	bool getLeftStickNoDeadZone(int index, int* outx, int* outy) const;
+	bool getLeftStickNoDeadZone(int index, float* outx, float* outy) const;
 private:
 
 	Controller() { mData.emplace_back(); }

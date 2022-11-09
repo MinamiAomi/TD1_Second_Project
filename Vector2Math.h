@@ -82,7 +82,15 @@ public:
 	}
 #pragma endregion
 
-
+	inline Vec2 AddX(float x) const {
+		return { this->x + x, this->y };
+	}
+	inline Vec2 AddY(float x) const {
+		return { this->x , this->y + y };
+	}
+	inline Vec2 Add(float x,float y) const {
+		return { this->x + x , this->y + y };
+	}
 	// ƒ[ƒ‚É‚·‚é
 	inline void SetZero() {
 		x = 0;

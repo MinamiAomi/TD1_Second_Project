@@ -46,7 +46,7 @@ void FadeStraightParticle::Update() {
 	float hsize = size / 2.0f;
 	Vec2 wall = false;
 	mMoveComponent->setPosition(MAP->PushOut(
-		mMoveComponent->getPosition(), mMoveComponent->getVelocity(), 
+		mMoveComponent->getPosition(), mMoveComponent->getVelocity() * DELTA_TIME->get(),
 		{ {-hsize,hsize},size,size }, &wall));
 
 	if (wall.IsZero() == false) {

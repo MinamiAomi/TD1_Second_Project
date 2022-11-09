@@ -66,6 +66,7 @@ void Map::Draw() {
 	if (Game::_debugMode) {
 		Debug::Print("Raw     %d  |  %d", rawMin, rawMax);
 		Debug::Print("Column  %d  |  %d", colMin, colMax);
+		Debug::Print("map     %d  |  %d", MAP_DATA.chipRowNum, MAP_DATA.chipColmunNum);
 		Vec2 mouse = MOUSE->getPosition();
 		int raw = getChipRow(mouse.x);
 		int col = getChipColmun(mouse.y);
@@ -89,14 +90,15 @@ void Map::Draw() {
 
 
 void Map::LoadMapData() {
-	static char buf[256] = {};
+
 	FILE* fp = NULL;
 
 	fopen_s(&fp, MAP_DATA.fileName, "r");
 	if (fp == NULL) {
 		return;
 	}
-	fgets(buf, 256, fp);
+	int x, y;
+	fscanf_s(fp, "%d,%d", &x, &y);
 	for (auto& it : mMapData) {
 		fscanf_s(fp, "%d,", &it);
 	}
@@ -179,6 +181,35 @@ Vec2 Map::PushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const {
 	return out;
 }
 
+
+bool Map::isGround(const Rect& rect) const {
+	return SideAllChip(rect.LeftBottom().Add(1, -1), rect.RightBottom().Add(-1, -1));
+}
+bool Map::isWallonRight(const Rect& rect) const {
+	return SideAllChip(rect.RightTop().Add(1, -1), rect.RightBottom().Add(1, 1));
+}
+bool Map::isWallonLeft(const Rect& rect) const {
+	return SideAllChip(rect.LeftTop().Add(-1, -1), rect.LeftBottom().Add(-1, 1));
+}
+
+bool Map::isCeiling(const Rect& rect) const {
+	return SideAllChip(rect.LeftTop().Add(1, 1), rect.RightTop().Add(-1, 1));
+}
+
+bool Map::SideAllChip(const Vec2& v1, const Vec2& v2) const {
+	ChipIndex startChipIndex = getInMapChipIndex(v1); // 左上のチップ座標
+	ChipIndex endChipIndex = getInMapChipIndex(v2); // 右下のチップ座標を入れる
+
+	for (int col = startChipIndex.column; col <= endChipIndex.column; col++) {
+		for (int row = startChipIndex.row; row <= endChipIndex.row; row++) {
+			ChipType type = getChipType(row, col);
+			if (type != kChipTypeNone && type != kChipTypeError) { // ０以外のチップを格納
+				return true;
+			}
+		}
+	}
+	return false;
+}
 
 Vec2 Map::LeftPushBack(const Vec2& pos, const Vec2& vel, const Rect& rect, std::vector<ChipData>& steppingChipData) const {
 	auto firstCollidedChip = &steppingChipData[0]; // 最初にあたるチップ

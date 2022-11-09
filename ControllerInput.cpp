@@ -164,13 +164,16 @@ bool Controller::isStickDirection(int index, StickDirection direction) const {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Controller::getRightTrigger(int index, int& out) const {
+bool Controller::getRightTrigger(int index, int* out) const {
+	if (out == NULL) {
+		return false;
+	}
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			if (mData[index].state.Gamepad.bRightTrigger > mData[index].triggerDeadZone) {
-				out = mData[index].state.Gamepad.bRightTrigger;
+				*out = mData[index].state.Gamepad.bRightTrigger;
 			} else {
-				out = 0;
+				*out = 0;
 			}
 			return true;
 		}
@@ -178,14 +181,17 @@ bool Controller::getRightTrigger(int index, int& out) const {
 	return false;
 }
 
-bool Controller::getLeftTrigger(int index, int& out) const {
+bool Controller::getLeftTrigger(int index, int* out) const {
+	if (out == NULL) {
+		return false;
+	}
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			if (mData[index].state.Gamepad.bLeftTrigger > mData[index].triggerDeadZone){
-				out = mData[index].state.Gamepad.bLeftTrigger;
+				*out = mData[index].state.Gamepad.bLeftTrigger;
 			}
 			else {
-				out = 0;
+				*out = 0;
 			}
 			return true;
 		}
@@ -195,70 +201,119 @@ bool Controller::getLeftTrigger(int index, int& out) const {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Controller::getRightStick(int index, int& outx, int& outy) const {
+bool Controller::getRightStick(int index, int* outx, int* outy) const {
+	if (outx == NULL || outy == NULL) {
+		return false;
+	}
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			if ((mData[index].state.Gamepad.sThumbRX <  mData[index].rightStickDeadZone &&
 				mData[index].state.Gamepad.sThumbRX > -mData[index].rightStickDeadZone)) {
-				outx = 0;
+				*outx = 0;
 			}
 			else {
-				outx = mData[index].state.Gamepad.sThumbRX;
+				*outx = mData[index].state.Gamepad.sThumbRX;
 			}
 			if ((mData[index].state.Gamepad.sThumbRY <  mData[index].rightStickDeadZone &&
 				mData[index].state.Gamepad.sThumbRY > -mData[index].rightStickDeadZone)) {
-				outy = 0;
+				*outy = 0;
 			}
 			else {
-				outy = mData[index].state.Gamepad.sThumbRY;
+				*outy = mData[index].state.Gamepad.sThumbRY;
 			}
 			return true;
 		}
 	}
 	return false;
 }
-bool Controller::getRightStick(int index, float& outx, float& outy) const {
+bool Controller::getRightStick(int index, float* outx, float* outy) const {
 	int x, y;
-	bool is = getRightStick(index, x, y);
-	outx = (float)x;
-	outy = (float)y;
+	bool is = getRightStick(index, &x, &y);
+	*outx = (float)x;
+	*outy = (float)y;
 	return is;
 }
-bool Controller::getRightStick(int index, StickMagnitude& out) const {
-	return getRightStick(index, out.x, out.y);
+bool Controller::getRightStick(int index, StickMagnitude* out) const {
+	return getRightStick(index, &(*out).x, &(*out).y);
 }
 
-bool Controller::getLeftStick(int index, int& outx, int& outy) const {
+bool Controller::getRightStickNoDeadZone(int index, int* outx, int* outy) const {
+	if (outx == NULL || outy == NULL) {
+		return false;
+	}
+	if (index < mData.size()) {
+		if (mData[index].isConnect == true) {
+			*outx = mData[index].state.Gamepad.sThumbRX;
+			*outy = mData[index].state.Gamepad.sThumbRY;
+			return true;
+		}
+	}
+	return false;
+}
+bool Controller::getRightStickNoDeadZone(int index, float* outx, float* outy) const {
+	int x, y;
+	bool is = getLeftStickNoDeadZone(index, &x, &y);
+	*outx = (float)x;
+	*outy = (float)y;
+	return is;
+}
+
+bool Controller::getLeftStick(int index, int* outx, int* outy) const {
+	if (outx == NULL || outy == NULL) {
+		return false;
+	}
 	if (index < mData.size()) {
 		if (mData[index].isConnect == true) {
 			if ((mData[index].state.Gamepad.sThumbLX <  mData[index].leftStickDeadZone &&
 				mData[index].state.Gamepad.sThumbLX > -mData[index].leftStickDeadZone)) {
-				outx = 0;
+				*outx = 0;
 			}
 			else {
-				outx = mData[index].state.Gamepad.sThumbLX;
+				*outx = mData[index].state.Gamepad.sThumbLX;
 			}
 			if ((mData[index].state.Gamepad.sThumbLY <  mData[index].leftStickDeadZone &&
 				mData[index].state.Gamepad.sThumbLY > -mData[index].leftStickDeadZone)) {
-				outy = 0;
+				*outy = 0;
 			}
 			else {
-				outy = mData[index].state.Gamepad.sThumbLY;
+				*outy = mData[index].state.Gamepad.sThumbLY;
 			}
 			return true;
 		}
 	}
 	return false;
 }
-bool Controller::getLeftStick(int index, float& outx, float& outy) const {
+bool Controller::getLeftStick(int index, float* outx, float* outy) const {
 	int x, y;
-	bool is = getLeftStick(index, x, y);
-	outx = (float)x;
-	outy = (float)y;
+	bool is = getLeftStick(index, &x, &y);
+	*outx = (float)x;
+	*outy = (float)y;
 	return is;
 }
-bool Controller::getLeftStick(int index, StickMagnitude& out) const {
-	return getLeftStick(index, out.x, out.y);
+bool Controller::getLeftStick(int index, StickMagnitude* out) const {
+	return getLeftStick(index, &(*out).x, &(*out).y);
+}
+
+bool Controller::getLeftStickNoDeadZone(int index, int* outx, int* outy) const {
+	if (outx == NULL || outy == NULL) {
+		return false;
+	}
+	if (index < mData.size()) {
+		if (mData[index].isConnect == true) {
+			*outx = mData[index].state.Gamepad.sThumbLX;
+			*outy = mData[index].state.Gamepad.sThumbLY;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Controller::getLeftStickNoDeadZone(int index, float* outx, float* outy) const {
+	int x, y;
+	bool is = getRightStickNoDeadZone(index, &x, &y);
+	*outx = (float)x;
+	*outy = (float)y;
+	return is;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

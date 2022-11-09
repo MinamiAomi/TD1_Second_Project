@@ -32,55 +32,10 @@ void TitleScene::Update()
 		getGame()->getEffectManager()->getNormalEffect()->Create(
 			200,
 			getGame()->getInput()->getMouse()->getPosition(),
-			800, 64, 64,Math::ToRadians((float)Func::Random(0,360)), 100.0f);
+			1000, 16, 16,Math::ToRadians((float)Func::Random(0,360)), 10000.2f);
 	}
 
-	//vel.SetZero();
-	//if (getGame()->getUseController()) {
-	//	CONTROLLER->GetLeftStick(0, vel.x, vel.y);
-	//	//Debug::Print("%f,%f", vel.x, vel.y);
-	//	if (!vel.IsZero()) {
-	//		vel = vel.Magnituded(5);
-	//	}
-	//	if (CONTROLLER->IsPressedButton(0, Controller::kRightTrigger)) {
-	//		sizex += 1;
-	//	}
-	//	if (CONTROLLER->IsPressedButton(0, Controller::kRightShoulder)) {
-	//		sizex += -1;
-	//	}
-	//	if (CONTROLLER->IsPressedButton(0, Controller::kLeftTrigger)) {
-	//		sizey += 1;
-	//	}
-	//	if (CONTROLLER->IsPressedButton(0, Controller::kLeftShoulder)) {
-	//		sizey += -1;
-	//	}
-	//}
-	//else {
-	//	if (KEY->IsPressed(DIK_A)) {
-	//		vel.x += -5;
-	//	}
-	//	if (KEY->IsPressed(DIK_D)) {
-	//		vel.x += 5;
-	//	}
-	//	if (KEY->IsPressed(DIK_W)) {
-	//		vel.y += 5;
-	//	}
-	//	if (KEY->IsPressed(DIK_S)) {
-	//		vel.y += -5;
-	//	}
-	//	if (KEY->IsPressed(DIK_Q)) {
-	//		vel.x += -5;
-	//		vel.y += 5;
-	//	}
-	//}
-	//
-	//rect = { {-sizex / 2,sizey / 2},sizex,sizey };
-	//pos += vel;
-	//prePos = pos;
-	//pos = getGame()->getMap()->PushOut(pos, vel, rect);
-#ifdef _DEBUG
-	//Debug::Print("size x %.2f  :  y %.2f", sizex, sizey);
-#endif // _DEBUG
+	
 
 
 	getGame()->getEffectManager()->Update();

@@ -131,8 +131,16 @@ public:
 		*wallNormal = (out - pos).Normalized();
 		return out;
 	}
+
+	bool isGround(const Rect& rect) const; // 移動後の矩形の下が地面であるか
+	bool isWallonRight(const Rect& rect) const; // 移動後の矩形の右が壁であるか
+	bool isWallonLeft(const Rect& rect) const; // 移動後の矩形の左が壁であるか
+	bool isCeiling(const Rect& rect) const; // 移動後の矩形の上が天井であるか
+
 private:
 	void LoadMapData();
+
+	bool SideAllChip(const Vec2& v1, const Vec2& v2) const;
 
 	Vec2 LeftPushBack(const Vec2& pos, const Vec2& vel, const Rect& rect, std::vector<ChipData>& steppingChipData) const;
 	Vec2 RightPushBack(const Vec2& pos, const Vec2& vel, const Rect& rect, std::vector<ChipData>& steppingChipData) const;

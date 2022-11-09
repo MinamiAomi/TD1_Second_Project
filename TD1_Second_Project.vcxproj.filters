@@ -131,15 +131,6 @@
     <Filter Include="GameObject\Player\Main">
       <UniqueIdentifier>{c3caae09-71a7-499d-ad10-b13ed93b65d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Player\State">
-      <UniqueIdentifier>{62af0861-f8b5-41d0-ba22-9903f05ecd0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Player\State\Base">
-      <UniqueIdentifier>{8f8d77d2-b670-4a44-b37b-ad231f254e9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Player\State\Wait">
-      <UniqueIdentifier>{66e9f93d-9a8b-4644-b01e-17291c7fe2c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="System\Input\Mouse">
       <UniqueIdentifier>{c5c7ae54-1890-401e-a504-efe57b078f53}</UniqueIdentifier>
     </Filter>
@@ -214,9 +205,6 @@
     </ClCompile>
     <ClCompile Include="PlayerMain.cpp">
       <Filter>GameObject\Player\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerStateWait.cpp">
-      <Filter>GameObject\Player\State\Wait</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>System\Input\Mouse</Filter>
@@ -409,17 +397,14 @@
     <ClInclude Include="PlayerMain.h">
       <Filter>GameObject\Player\Main</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerStateBase.h">
-      <Filter>GameObject\Player\State\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerStateWait.h">
-      <Filter>GameObject\Player\State\Wait</Filter>
-    </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>System\Input\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="InputDevice.h">
       <Filter>System\Input\InoutDevice</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\text\map.csv" />
   </ItemGroup>
 </Project>
