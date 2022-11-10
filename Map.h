@@ -39,6 +39,9 @@ public:
 		bool operator==(const ChipIndex& i) {
 			return row == i.row && column == i.column;
 		}
+		friend ChipIndex operator-(const ChipIndex& a, const ChipIndex& b) {
+			return { a.row - b.row,a.column - b.column };
+		}
 	};
 
 	struct ChipData {
@@ -46,6 +49,7 @@ public:
 		ChipType type;
 		ChipData() : index(), type() {}
 		ChipData(int r, int c, ChipType t) : index(r, c), type(t) {}
+		ChipData(ChipIndex in, ChipType t) : index(in), type(t) {}
 	};
 
 private:
@@ -131,6 +135,8 @@ public:
 		*wallNormal = (out - pos).Normalized();
 		return out;
 	}
+
+	Vec2 HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const;
 
 	bool isGround(const Rect& rect) const; // 移動後の矩形の下が地面であるか
 	bool isWallonRight(const Rect& rect) const; // 移動後の矩形の右が壁であるか

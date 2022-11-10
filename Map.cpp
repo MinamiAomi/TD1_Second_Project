@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Container.h"
 #include "InputDevice.h"
-
+#include "Lerp.h"
 
 #ifdef _DEBUG
 #include "Debug.h"
@@ -181,6 +181,27 @@ Vec2 Map::PushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const {
 	return out;
 }
 
+Vec2 Map::HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const {
+	std::vector<ChipData> steppingChipData; // 矩形の踏んでいる０以外チップが入る 
+	Vec2 out = pos;
+
+	Rect preRect = { rect.leftTop + pos - vel, rect.width - 1,rect.height - 1 };
+	Rect curRect = { rect.leftTop + pos, rect.width - 1, rect.height - 1 };
+
+	
+
+
+
+
+	ChipIndex leftTopMovementIndex = getChipIndex(preRect.leftTop) - getChipIndex(curRect.leftTop);
+
+	if (leftTopMovementIndex.row > leftTopMovementIndex.column) {
+		
+	}
+
+	
+	return out;
+}
 
 bool Map::isGround(const Rect& rect) const {
 	return SideAllChip(rect.LeftBottom().Add(1, -1), rect.RightBottom().Add(-1, -1));

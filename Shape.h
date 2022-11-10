@@ -123,6 +123,10 @@ public:
 		: leftTop(lt), rightTop(rt), leftBottom(lb), rightBottom(rb) {}
 	~Quad() {}
 
+	Quad SideFlip() const {
+		return { rightTop,leftTop,rightBottom,leftBottom };
+	}
+
 	ShapeType getType() const { return kShapeTypeQuad; }
 };
 

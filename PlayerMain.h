@@ -96,8 +96,10 @@ public:
     void SetState();
 
 private:
+    void NormalState();
+    void DushAttakState();
+
     void Input();
-    void ApplyForce();
 };
 
 

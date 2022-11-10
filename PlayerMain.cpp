@@ -47,7 +47,12 @@ void Player::Update() {
 
 void Player::Draw() {
 
+	if (mIsRightDirection) {
 	CAMERA->DrawSpriteRect(mImageRect.Translation(mPosition), CONTAINER->getPlayerData().image);
+	}
+	else {
+		CAMERA->DrawQuad(ToQuad(mImageRect.Translation(mPosition)).SideFlip(), CONTAINER->getPlayerData().image);
+	}
 	CAMERA->DrawRect(mMapColliderRect.Translation(mPosition), 0xFF0000FF, kFillModeWireFrame);
 }
 
@@ -95,41 +100,10 @@ void Player::StateUpdate() {
 void Player::Move() {
 
 	if (mIsDushAttak) {
-		
-		mAcceleration = mDushAttakDirection.Magnituded(CONTAINER->getPlayerData().dushAttakSpeed);
+		DushAttakState();
 	}
 	else {
-		if (mDushCoolTime > 0) {
-			mDushCoolTime += -DELTA_TIME->get();
-		}
-
-		mAcceleration.x = CONTAINER->getPlayerData().movementJerk * mMoveInput;
-		
-		if (mJumpInput && mIsGround && mIsJump == false) {
-			mIsJump = true;
-			mJumpInputRelease = false;
-			mAcceleration.y += CONTAINER->getPlayerData().jumpForce;
-		}
-		if (mJumpInput && mIsGround == false && mIsDoubleJump == false && mJumpInputRelease == true) {
-			mIsDoubleJump = true;
-			mAcceleration.y = CONTAINER->getPlayerData().jumpForce;
-		}
-		if (mIsGround == false) {
-			mAcceleration.y += CONTAINER->getPlayerData().gravity;
-		}
-		if (mDushAttakInput && mDushCoolTime <= 0.0f) {
-			mIsDushAttak = true;
-			if (mDushAttakDirectionInput.IsZero()) {
-				if (mIsRightDirection) {
-					mDushAttakDirectionInput = { 1,0 };
-				}
-				else {
-					mDushAttakDirectionInput = { -1,0 };
-				}
-			}
-			mDushAttakDirection = mDushAttakDirectionInput;
-			mDushAttakStartPosition = mPosition;
-		}
+		NormalState();
 	}
 	mVelocity = mAcceleration;
 
@@ -189,6 +163,42 @@ void Player::Input() {
 	}
 }
 
-void Player::ApplyForce() {
+void Player::NormalState() {
+	if (mDushCoolTime > 0) {
+		mDushCoolTime += -DELTA_TIME->get();
+	}
+
+	mAcceleration.x = CONTAINER->getPlayerData().movementJerk * mMoveInput;
+
+	if (mJumpInput && mIsGround && mIsJump == false) {
+		mIsJump = true;
+		mJumpInputRelease = false;
+		mAcceleration.y += CONTAINER->getPlayerData().jumpForce;
+	}
+	if (mJumpInput && mIsGround == false && mIsDoubleJump == false && mJumpInputRelease == true) {
+		mIsDoubleJump = true;
+		mAcceleration.y = CONTAINER->getPlayerData().jumpForce;
+	}
+	if (mIsGround == false) {
+		mAcceleration.y += CONTAINER->getPlayerData().gravity;
+	}
+	if (mDushAttakInput && mDushCoolTime <= 0.0f) {
+		mIsDushAttak = true;
+		if (mDushAttakDirectionInput.IsZero()) {
+			if (mIsRightDirection) {
+				mDushAttakDirectionInput = { 1,0 };
+			}
+			else {
+				mDushAttakDirectionInput = { -1,0 };
+			}
+		}
+		mDushAttakDirection = mDushAttakDirectionInput;
+		mDushAttakStartPosition = mPosition;
+	}
+}
+
+void Player::DushAttakState() {
+
+	mAcceleration = mDushAttakDirection.Magnituded(CONTAINER->getPlayerData().dushAttakSpeed);
 
 }

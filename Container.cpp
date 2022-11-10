@@ -49,17 +49,17 @@ void Container::LoadData() {
 	mGameData.player.airMoveDecay = 0.8f;
 	mGameData.player.moveFriction = 0.9f;
 	mGameData.player.moveSpeedMax = 300.0f;
-	mGameData.player.dushAttakSpeed = 50000.0f;
-	mGameData.player.dushAttakDistance = 250.0f;
+	mGameData.player.dushAttakSpeed = 4000.0f;
+	mGameData.player.dushAttakDistance = 300.0f;
 	mGameData.player.dushAttakCoolTime = 1.5f;
 }
 
 void Container::LoadImages() {
-	mGameData.particle.fadeStraight.image.handle = Novice::LoadTexture("./resource/images/partical2.png");
+	mGameData.particle.fadeStraight.image.handle = Novice::LoadTexture("./resource/images/effect/partical2.png");
 	mGameData.map.chipImageHandle[kChipTypeNone] = -1;
-	mGameData.map.chipImageHandle[kChipTypeBlock] = Novice::LoadTexture("./resource/images/chipBlock.png");
+	mGameData.map.chipImageHandle[kChipTypeBlock] = Novice::LoadTexture("./resource/images/map/chipBlock.png");
 
-	mGameData.player.image.handle = Novice::LoadTexture("white1x1.png");
+	mGameData.player.image.handle = Novice::LoadTexture("./resource/images/player/test.png");
 }
 
 void Container::LoadMapCSV() {
