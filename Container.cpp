@@ -16,7 +16,7 @@ void Container::LoadData() {
 	mGameData.camera.windowCenter = { (float)mWindowData.kWidth / 2.0f,(float)mWindowData.kHeight / 2.0f };
 	mGameData.camera.worldPosition = mGameData.camera.windowCenter;
 	mGameData.camera.scele = 1.0f;
-	mGameData.camera.theta = 0.0f;
+	mGameData.camera.theta = 0.0f;		
 
 	mGameData.effect.normal.particleNum = 18;
 

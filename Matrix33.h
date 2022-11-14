@@ -27,6 +27,10 @@ public:
 		return det;
 	}
 
+	const float* operator[](size_t i) const {
+		return m[i];
+	}
+
 	friend inline Matrix33 operator*(const Matrix33& mat1, const Matrix33& mat2) {
 		return {
 			mat1.m[0][0] * mat2.m[0][0] + mat1.m[0][1] * mat2.m[1][0] + mat1.m[0][2] * mat2.m[2][0],

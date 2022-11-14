@@ -182,23 +182,21 @@ Vec2 Map::PushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const {
 }
 
 Vec2 Map::HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const {
-	std::vector<ChipData> steppingChipData; // 矩形の踏んでいる０以外チップが入る 
 	Vec2 out = pos;
 
-	Rect preRect = { rect.leftTop + pos - vel, rect.width - 1,rect.height - 1 };
-	Rect curRect = { rect.leftTop + pos, rect.width - 1, rect.height - 1 };
+	if (vel.IsZero()) {
+		return out;
+	}
+
+	Vec2 prePos = pos - vel; // 移動前の位置
+	float velLengthDiv = vel.Length() / mChipSize;
+	Vec2 velDiv = vel.Magnituded(velLengthDiv);
 
 	
 
 
 
-
-	ChipIndex leftTopMovementIndex = getChipIndex(preRect.leftTop) - getChipIndex(curRect.leftTop);
-
-	if (leftTopMovementIndex.row > leftTopMovementIndex.column) {
-		
-	}
-
+	
 	
 	return out;
 }
