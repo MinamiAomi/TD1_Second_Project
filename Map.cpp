@@ -189,10 +189,14 @@ Vec2 Map::HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) c
 	}
 
 	Vec2 prePos = pos - vel; // ˆÚ“®‘O‚ÌˆÊ’u
-	float velLengthDiv = vel.Length() / mChipSize;
-	Vec2 velDiv = vel.Magnituded(velLengthDiv);
+	Lerp<Vec2> lerp(mChipSize / vel.Length(), prePos, pos);
+	int num = 10;
+	bool hit = false;
+	while (lerp.IsOver() == false)
+		prePos += ++lerp;
+		PushOut(prePos, velDiv, rect, &hit);
 
-	
+	}
 
 
 
