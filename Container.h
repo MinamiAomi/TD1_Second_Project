@@ -3,6 +3,7 @@
 #include "DataStruct.h"
 #include "Map.h"
 #include "PlayerMain.h"
+#include "BossInitData.h"
 
 class Container {
 
@@ -24,6 +25,7 @@ private:
 		Map::InitData map = {};
 
 		Player::InitData player = {};
+		BossInitData boss = {};
 	};
 
 private:
@@ -38,6 +40,7 @@ public:
 	const ParticleData& getParticleData() const { return mGameData.particle; }
 	const Map::InitData& getMapData() const { return mGameData.map; }
 	const Player::InitData& getPlayerData() const { return mGameData.player; }
+	const BossInitData& getBossData() const { return mGameData.boss; }
 
 public:
 	Container();
@@ -48,6 +51,6 @@ public:
 private:
 	void LoadData();
 	void LoadImages();
-	void LoadMapCSV();
+	void LoadBoss();
 };
 

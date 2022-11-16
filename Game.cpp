@@ -11,6 +11,7 @@
 #include "EffectManager.h"
 #include "Map.h"
 #include "PlayerMain.h"
+#include "Boss.h"
 
 #ifdef _DEBUG
 #include "Debug.h"
@@ -101,11 +102,13 @@ void Game::Initialize() {
 	mEffectManager = new EffectManager(this);
 	mMap = new Map(this);
 	mPlayer = new Player(this);
+	mBoss = new Boss(this);
 	// ”wŒi‚Í•
 	Novice::SetClearColor(mContainer->getWindow().kClearColor);
 }
 
 void Game::Finalize() {
+	Func::SafeDelete(mBoss);
 	Func::SafeDelete(mPlayer);
 	Func::SafeDelete(mMap);
 	Func::SafeDelete(mEffectManager);
@@ -128,7 +131,7 @@ void Game::ObjCreate() {
 	mEffectManager->Create();
 	mMap->Create();
 	mPlayer->Create();
-
+	mBoss->Create();
 }
 
 #ifdef _DEBUG

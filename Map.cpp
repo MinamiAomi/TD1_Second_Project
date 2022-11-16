@@ -97,8 +97,6 @@ void Map::LoadMapData() {
 	if (fp == NULL) {
 		return;
 	}
-	int x, y;
-	fscanf_s(fp, "%d,%d", &x, &y);
 	for (auto& it : mMapData) {
 		fscanf_s(fp, "%d,", &it);
 	}
@@ -181,7 +179,7 @@ Vec2 Map::PushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const {
 	return out;
 }
 
-Vec2 Map::HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const {
+Vec2 Map::HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect, bool* isHit) const {
 	Vec2 out = pos;
 
 	if (vel.IsZero()) {
@@ -189,19 +187,24 @@ Vec2 Map::HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) c
 	}
 
 	Vec2 prePos = pos - vel; // ˆÚ“®‘O‚ÌˆÊ’u
+	Vec2 curPos = pos - vel;
 	Lerp<Vec2> lerp(mChipSize / vel.Length(), prePos, pos);
 	int num = 10;
 	bool hit = false;
-	while (lerp.IsOver() == false)
-		prePos += ++lerp;
-		PushOut(prePos, velDiv, rect, &hit);
-
+	while (lerp.IsEnd() == false){
+		++lerp;
+		lerp.ParamClamp();
+		curPos = lerp;
+		out = PushOut(curPos, curPos - prePos, rect, &hit);
+		if (hit) {
+			
+			break;
+		}
+		prePos = curPos;
 	}
-
-
-
 	
-	
+	*isHit = hit;
+
 	return out;
 }
 

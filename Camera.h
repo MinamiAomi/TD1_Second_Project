@@ -14,6 +14,9 @@ public:
 		Vec2 worldPosition;
 		float scele;
 		float theta;
+
+		Vec2 scrollMin;
+		Vec2 scrollMax;
 	};
 
 private:
@@ -24,6 +27,8 @@ private:
 	Matrix33 mMatrix;
 	Matrix33 mInverseMatrix;
 	Rect mDrawArea;
+
+	Lerp<Vec2> lerp;
 
 public:
 	const Vec2& getWorldPosition() const { return mWorldPosition; }

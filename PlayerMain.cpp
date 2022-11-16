@@ -33,15 +33,8 @@ void Player::Update() {
 
 	this->Input();
 
-
 	Move();
 	StateUpdate();
-	
-	Debug::Print("Acc  %f  :  %f", mAcceleration.x, mAcceleration.y);
-	Debug::Print("Vel  %f  :  %f", mVelocity.x, mVelocity.y);
-	Debug::Print("Pos  %f  :  %f", mPosition.x, mPosition.y);
-	
-
 
 }
 
@@ -79,7 +72,9 @@ void Player::StateUpdate() {
 	if (mIsDushAttak) {
 		if (mPosition.Distance(mDushAttakStartPosition) > CONTAINER->getPlayerData().dushAttakDistance && mIsDushAttak || mIsMapCollsion) {
 			mIsDushAttak = false;
-			mPosition = mDushAttakStartPosition + mDushAttakDirection.Magnituded(CONTAINER->getPlayerData().dushAttakDistance);
+			if (mIsMapCollsion == false) {
+				mPosition = mDushAttakStartPosition + mDushAttakDirection.Magnituded(CONTAINER->getPlayerData().dushAttakDistance);
+			}
 			mAcceleration.SetZero();
 			mDushCoolTime = CONTAINER->getPlayerData().dushAttakCoolTime;
 		}
@@ -90,11 +85,6 @@ void Player::StateUpdate() {
 	if (mAcceleration.x < 0) {
 		mIsRightDirection = false;
 	}
-	Debug::Print("Ground       :  %d", mIsGround);
-	Debug::Print("Ceiling      :  %d", mIsCeiling);
-	Debug::Print("LeftonWall   :  %d", mIsLeftonWall);
-	Debug::Print("RightonWall  :  %d", mIsRightonWall);
-	Debug::Print("RightDirection  :  %d", mIsRightDirection);
 }
 
 void Player::Move() {
@@ -105,10 +95,7 @@ void Player::Move() {
 	else {
 		NormalState();
 	}
-	mVelocity = mAcceleration;
-
-	mPosition += mVelocity * DELTA_TIME->get();
-	mPosition = MAP->PushOut(mPosition, mVelocity * DELTA_TIME->get(), mMapColliderRect, &mIsMapCollsion);
+	
 }
 
 
@@ -195,10 +182,19 @@ void Player::NormalState() {
 		mDushAttakDirection = mDushAttakDirectionInput;
 		mDushAttakStartPosition = mPosition;
 	}
+	mVelocity = mAcceleration;
+
+	mPosition += mVelocity * DELTA_TIME->get();
+	mPosition = MAP->PushOut(mPosition, mVelocity * DELTA_TIME->get(), mMapColliderRect, &mIsMapCollsion);
 }
 
 void Player::DushAttakState() {
 
 	mAcceleration = mDushAttakDirection.Magnituded(CONTAINER->getPlayerData().dushAttakSpeed);
+
+	mVelocity = mAcceleration;
+
+	mPosition += mVelocity * DELTA_TIME->get();
+	mPosition = MAP->HighSpeedPushOut(mPosition, mVelocity * DELTA_TIME->get(), mMapColliderRect, &mIsMapCollsion);
 
 }

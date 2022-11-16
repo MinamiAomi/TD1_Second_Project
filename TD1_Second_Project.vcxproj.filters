@@ -137,6 +137,39 @@
     <Filter Include="System\Input\InoutDevice">
       <UniqueIdentifier>{0388acd5-9528-411d-a0f8-1e319d18d9b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Boss">
+      <UniqueIdentifier>{71f421e5-7ae9-4ca1-840f-0f7f3f60a8d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts">
+      <UniqueIdentifier>{5c1eb94d-cba1-4f22-bb9a-38b399eb9d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\Base">
+      <UniqueIdentifier>{d10ce618-336a-460b-b3fa-fa9c52bc82e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\A">
+      <UniqueIdentifier>{bbf70e9a-5d0d-4a1a-a160-1009dd8e6276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\A\arm1">
+      <UniqueIdentifier>{7018b66f-64d5-48f1-801a-4b09e8b250cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\A\arm2">
+      <UniqueIdentifier>{15c601ce-8644-46f7-ae12-a5fc8106515d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\A\hand">
+      <UniqueIdentifier>{073dd944-0e1b-40d4-a6fe-5673ff8c66e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\B">
+      <UniqueIdentifier>{76af3d9f-49f7-4f3f-b2c0-6bdbe86678f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\B\arm1">
+      <UniqueIdentifier>{9a2fde00-d288-41c5-bf95-2fe2fb33c22b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\B\arm2">
+      <UniqueIdentifier>{b57e6c91-1cc2-4e44-bbfa-584b3c47bb90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Boss\Parts\B\hand">
+      <UniqueIdentifier>{a74579a1-ca57-457a-a11c-96996b73617f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -211,6 +244,30 @@
     </ClCompile>
     <ClCompile Include="InputDevice.cpp">
       <Filter>System\Input\InoutDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>GameObject\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossPart.cpp">
+      <Filter>GameObject\Boss\Parts\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BossArmA1.cpp">
+      <Filter>GameObject\Boss\Parts\A\arm1</Filter>
+    </ClCompile>
+    <ClCompile Include="BossArmA2.cpp">
+      <Filter>GameObject\Boss\Parts\A\arm2</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHandA.cpp">
+      <Filter>GameObject\Boss\Parts\A\hand</Filter>
+    </ClCompile>
+    <ClCompile Include="BossArmB1.cpp">
+      <Filter>GameObject\Boss\Parts\B\arm1</Filter>
+    </ClCompile>
+    <ClCompile Include="BossArmB2.cpp">
+      <Filter>GameObject\Boss\Parts\B\arm2</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHandB.cpp">
+      <Filter>GameObject\Boss\Parts\B\hand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +459,33 @@
     </ClInclude>
     <ClInclude Include="InputDevice.h">
       <Filter>System\Input\InoutDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>GameObject\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossPart.h">
+      <Filter>GameObject\Boss\Parts\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BossArmA1.h">
+      <Filter>GameObject\Boss\Parts\A\arm1</Filter>
+    </ClInclude>
+    <ClInclude Include="BossArmA2.h">
+      <Filter>GameObject\Boss\Parts\A\arm2</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHandA.h">
+      <Filter>GameObject\Boss\Parts\A\hand</Filter>
+    </ClInclude>
+    <ClInclude Include="BossInitData.h">
+      <Filter>GameObject\Boss\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="BossArmB1.h">
+      <Filter>GameObject\Boss\Parts\B\arm1</Filter>
+    </ClInclude>
+    <ClInclude Include="BossArmB2.h">
+      <Filter>GameObject\Boss\Parts\B\arm2</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHandB.h">
+      <Filter>GameObject\Boss\Parts\B\hand</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

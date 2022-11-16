@@ -25,6 +25,7 @@ private:
 	class EffectManager* mEffectManager = nullptr;
 	class Map* mMap = nullptr;
 	class Player* mPlayer = nullptr;
+	class Boss* mBoss = nullptr;
 	// ÉQÉbÉ^Å[óﬁ
 public:
 
@@ -41,6 +42,7 @@ public:
 	class EffectManager* getEffectManager() { return mEffectManager; }
 	class Map* getMap() { return mMap; }
 	class Player* getPlayer() { return mPlayer; }
+	class Boss* getBoss() { return mBoss; }
 
 public:
 	Game();

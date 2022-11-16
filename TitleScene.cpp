@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "Func.h"
 #include "PlayerMain.h"
+#include "Boss.h"
 
 #ifdef _DEBUG
 #include "Debug.h"
@@ -27,6 +28,7 @@ void TitleScene::Update()
 	MAP->Update();
 
 	PLAYER->Update();
+	BOSS->Update();
 
 	if (MOUSE->IsTrigger(kMouseButtonLeft)) {
 		getGame()->getEffectManager()->getNormalEffect()->Create(
@@ -44,6 +46,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw() {
 	MAP->Draw();
+	BOSS->Draw();
 	PLAYER->Draw();
 	getGame()->getEffectManager()->getNormalEffect()->Draw();
 

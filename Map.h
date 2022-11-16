@@ -136,8 +136,8 @@ public:
 		return out;
 	}
 
-	Vec2 HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect) const;
-
+	Vec2 HighSpeedPushOut(const Vec2& pos, const Vec2& vel, const Rect& rect, bool* isHit) const;
+	
 	bool isGround(const Rect& rect) const; // 移動後の矩形の下が地面であるか
 	bool isWallonRight(const Rect& rect) const; // 移動後の矩形の右が壁であるか
 	bool isWallonLeft(const Rect& rect) const; // 移動後の矩形の左が壁であるか

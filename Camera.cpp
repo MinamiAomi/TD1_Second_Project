@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "Game.h"
 #include "Container.h"
-
+#include "DeltaTime.h"
 #ifdef _DEBUG
 #include "Debug.h"
 #endif // _DEBUG
@@ -21,9 +21,15 @@ void Camera::Create() {
 	mScale = getGame()->getContainer()->getCameraData().scele;
 	mTheta = getGame()->getContainer()->getCameraData().theta;
 	mDrawArea = { {mWorldPosition.x - mWindowSize.x / 2.0f,mWorldPosition.y + mWindowSize.y / 2.0f },mWindowSize.x,mWindowSize.y };
+	lerp.SetParam(1.0f);
 }
 
 void Camera::Update() {
+	Vec2 ppos = PLAYER->getPosition();
+	mWorldPosition = ppos;
+	mWorldPosition.x = Math::Clamp<float>(mWorldPosition.x, CAMERA_DATA.scrollMin.x, CAMERA_DATA.scrollMax.x);
+	mWorldPosition.y = Math::Clamp<float>(mWorldPosition.y, CAMERA_DATA.scrollMin.y, CAMERA_DATA.scrollMax.y);
+
 #ifdef _DEBUG
 	if (Game::_debugMode) {
 		constexpr float zoomSpeed = 0.03f;

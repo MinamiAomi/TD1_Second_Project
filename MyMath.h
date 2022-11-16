@@ -6,6 +6,32 @@
 #include "SinCosTable.h"
 
 
+struct TransForm
+{
+	Vec2 pos;
+	float angle = 0.0f;
+	float scale = 1.0f;
+
+	Matrix33 mat;
+
+	TransForm* parent = nullptr;
+
+	Matrix33 GetMatrix() const {
+		return Matrix33::MakeScaling(scale) * Matrix33::MakeRotation(angle) * Matrix33::MakeTranslation(pos);
+	}
+	Matrix33 GetParentMatrix() const {
+		return parent->GetConnectMatrix();
+	}
+	Matrix33 GetConnectMatrix() const {
+		if (parent == nullptr) {
+			return GetMatrix();
+		}
+		return GetMatrix() * parent->GetConnectMatrix();
+	}
+
+};
+
+
 namespace Math
 {
 
