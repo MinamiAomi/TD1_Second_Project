@@ -8,48 +8,55 @@ class Boss :
 	public GameObject
 {
 public:
+	enum ArmId 
+	{
+		kArmLeftTop,
+		kArmRightTop,
+		kArmLeftBottom,
+		kArmRightBottom,
+
+		kArmNum
+	};
+	enum PartId
+	{
+		kPartArm1,
+		kPartArm2,
+		kPartHand,
+
+		kPartNum
+	};
+
 	struct InitData
 	{
-		ImageData image;
-		Quad imageQuad;
+		ImageData mainImage;
+		ImageData armImage;
+		ImageData handImage;
+		Quad mainImageQuad;
+		Quad armImageQuad;
+		Quad handImageQuad;
 
 		Vec2 position;
 		float angle;
 		float scale;
-	};
 
-	enum BossPartId
-	{
-		kBossPartArmA1,
-		kBossPartArmB1,
+		float armLength;
+		Vec2 root[kArmNum];
 
-		kBossPartArmA2,
-		kBossPartArmB2,
-		
-		kBossPartHandA,
-		kBossPartHandB,
-
-
-		kBossPartIdNum
 	};
 
 private:
 	TransForm mTransForm;
-	class BossPart* mParts[kBossPartIdNum];
-	class BossArmA1* mArmA1 = nullptr;
-	class BossArmB1* mArmB1 = nullptr;
+	
+	TransForm mArm1[kArmNum] = {};
+	TransForm mArm2[kArmNum] = {};
+	TransForm mHand[kArmNum] = {};
 
-	class BossArmA2* mArmA2 = nullptr;
-	class BossArmB2* mArmB2 = nullptr;
+	Vec2 mTragetPos[kArmNum];
 
-	class BossHandA* mHandA = nullptr;
-	class BossHandB* mHandB = nullptr;
 
 public:
 	Boss(class Game* game);
 	~Boss();
-
-	TransForm* TransFormPtr() { return &mTransForm; }
 
 	void Create();
 	void Update();

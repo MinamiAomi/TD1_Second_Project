@@ -2,12 +2,7 @@
 #include "Game.h"
 #include "Container.h"
 #include "Camera.h"
-#include "BossArmA1.h"
-#include "BossArmA2.h"
-#include "BossHandA.h"
-#include "BossArmB1.h"
-#include "BossArmB2.h"
-#include "BossHandB.h"
+
 #include "Func.h"
 
 #define BOSS_DATA getGame()->getContainer()->getBossData()
@@ -15,49 +10,81 @@
 Boss::Boss(class Game* game) :
 	GameObject(game)
 {
-	mParts[kBossPartArmA1] = mArmA1 = new BossArmA1(this,&mTransForm);
-	mParts[kBossPartArmB1] = mArmB1 = new BossArmB1(this, &mTransForm);
 
-	mParts[kBossPartArmA2] = mArmA2 = new BossArmA2(this,mParts[kBossPartArmA1]->GetTransFormPtr());
-	mParts[kBossPartArmB2] = mArmB2 = new BossArmB2(this,mParts[kBossPartArmB1]->GetTransFormPtr());
-	
-	mParts[kBossPartHandA] = mHandA = new BossHandA(this, mParts[kBossPartArmA2]->GetTransFormPtr());
-	mParts[kBossPartHandB] = mHandB = new BossHandB(this, mParts[kBossPartArmB2]->GetTransFormPtr());
 }
 Boss::~Boss() {
-	mHandB = nullptr;
-	mHandA = nullptr;
-	
-	mArmB2 = nullptr;
-	mArmA2 = nullptr;
-	
-	mArmB1 = nullptr;
-	mArmA1 = nullptr;
-	for (auto it : mParts) {
-		Func::SafeDelete(it);
-	}
+
+
 }
 
 void Boss::Create() {
-	mTransForm.pos = BOSS_DATA.main.position;
-	mTransForm.angle = BOSS_DATA.main.angle;
-	mTransForm.scale = BOSS_DATA.main.scale;
-
-	for (auto it : mParts) {
-		it->Create();
+	mTransForm.pos = BOSS_DATA.position;
+	mTransForm.angle = BOSS_DATA.angle;
+	mTransForm.scale = BOSS_DATA.scale;
+	TransForm tmp = { {0,0},0.0f,1.0f };
+	for (int i = 0; i < kArmNum; i++) {
+		mArm1[i] = { BOSS_DATA.root[i],0.0f,1.0f};
+		mArm2[i] = { BOSS_DATA.root[i],0.0f,1.0f};
+		mHand[i] = { BOSS_DATA.root[i] * 2,0.0f,1.0f };
 	}
 }
 
 void Boss::Update() {
+
 	
-	for (auto it : mParts) {
-		it->Update();
+
+	Vec2 tmpHand = PLAYER->getPosition() - mArm2[0].pos - mArm1[0].pos - mTransForm.pos;
+	mTragetPos[0] = PLAYER->getPosition();
+
+	float len = BOSS_DATA.armLength;
+	for (int i = 0; i < kArmNum; i++) {
+	
+		Vec2 endroot = mTragetPos[i] - mArm1[i].pos - mTransForm.pos;
+		float A = endroot.Length();
+		endroot = endroot.Normalized();
+	
+		float angleFromX = endroot.Angle();
+		float theta = Math::Acos((A * A + len * len - len * len) / (2.0f * A * len)); 
+		
+		if (i % 2 == 0 ) {
+			angleFromX += theta ;
+		}
+		else {
+			angleFromX += -theta;
+		}
+		if (A < len * 2) {
+			mArm2[i].pos = Vec2(Math::Cos(angleFromX), Math::Sin(angleFromX)) * len;
+			mHand[i].pos = mTragetPos[i] - mArm2[i].pos - mArm1[i].pos - mTransForm.pos;
+		}
+		else {
+			mArm2[i].pos = endroot * len;
+			mHand[i].pos = endroot * len;
+		}
 	}
+
 }
+
+
 void Boss::Draw() {
-	Quad bossQuad = BOSS_DATA.main.imageQuad.TransForm(mTransForm.GetMatrix());
-	CAMERA->DrawQuad(bossQuad, BOSS_DATA.main.image);
-	for (auto it : mParts) {
-		it->Draw();
+
+	Matrix33 mat = mTransForm.GetMatrix();
+	Quad bossQuad = BOSS_DATA.mainImageQuad.TransForm(mat);
+	CAMERA->DrawQuad(bossQuad, BOSS_DATA.mainImage);
+
+
+
+	Vec2 bossPos = mTransForm.pos;
+	for (int i = 0; i < kArmNum; i++) {
+		Vec2 arm1Pos = mArm1[i].pos + bossPos;
+		Vec2 arm2Pos = mArm2[i].pos + arm1Pos;
+		Vec2 handPos = mHand[i].pos + arm2Pos;
+		CAMERA->DrawCircle({ arm1Pos, 20 });
+		CAMERA->DrawCircle({ arm2Pos, 20 });
+		CAMERA->DrawCircle({ handPos, 20 });
+		
+		CAMERA->DrawLine({ arm1Pos , arm2Pos });
+		CAMERA->DrawLine({ arm2Pos , handPos });
+				
 	}
+
 }

@@ -20,11 +20,13 @@ void BossHandA::Create() {
 }
 
 void BossHandA::Update() {
-	//mTransForm.angle += Math::ToRadians(2.0f);
-	mTransForm.pos -= 2.0f;
+	mTransForm.angle += Math::ToRadians(2.0f);
 }
 
 void BossHandA::Draw() {
-	Quad quad = BOSS_INITDATA.handA.imageQuad.TransForm(mTransForm.GetConnectMatrix());
+	Matrix33 mat = mTransForm.GetParentMatrix();
+
+	BOSS_CAMERA->DrawCircle({ mTransForm.pos * mat,20 });
+	Quad quad = BOSS_INITDATA.handA.imageQuad.TransForm(mTransForm.GetMatrix() * mat);
 	BOSS_CAMERA->DrawQuad(quad, BOSS_INITDATA.handA.image);
 }

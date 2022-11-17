@@ -24,6 +24,9 @@ void BossArmA2::Update() {
 }
 
 void BossArmA2::Draw() {
-	Quad quad = BOSS_INITDATA.armA2.imageQuad.TransForm(mTransForm.GetConnectMatrix());
+	Matrix33 mat = mTransForm.GetParentMatrix();
+
+	BOSS_CAMERA->DrawCircle({ mTransForm.pos * mat,20 });
+	Quad quad = BOSS_INITDATA.armA2.imageQuad.TransForm(mTransForm.GetMatrix() * mat);
 	BOSS_CAMERA->DrawQuad(quad, BOSS_INITDATA.armA2.image);
 }

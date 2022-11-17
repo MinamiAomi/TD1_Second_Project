@@ -93,12 +93,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boss.cpp" />
-    <ClCompile Include="BossArmA1.cpp" />
-    <ClCompile Include="BossArmA2.cpp" />
-    <ClCompile Include="BossArmB1.cpp" />
-    <ClCompile Include="BossArmB2.cpp" />
-    <ClCompile Include="BossHandA.cpp" />
-    <ClCompile Include="BossHandB.cpp" />
     <ClCompile Include="BossPart.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\TextureManager.cpp" />
@@ -134,13 +128,6 @@
     <ClInclude Include="..\DirectXGame\math\Vector4.h" />
     <ClInclude Include="Array.h" />
     <ClInclude Include="Boss.h" />
-    <ClInclude Include="BossArmA1.h" />
-    <ClInclude Include="BossArmA2.h" />
-    <ClInclude Include="BossArmB1.h" />
-    <ClInclude Include="BossArmB2.h" />
-    <ClInclude Include="BossHandA.h" />
-    <ClInclude Include="BossHandB.h" />
-    <ClInclude Include="BossInitData.h" />
     <ClInclude Include="BossPart.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\CircleShadow.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\DebugCamera.h" />

@@ -69,86 +69,44 @@ void Container::LoadImages() {
 
 	mGameData.player.image.handle = Novice::LoadTexture("./resource/images/player/test.png");
 	
-	mGameData.boss.main.image.handle = Novice::LoadTexture("./resource/images/boss/test.png");
-	int arm = Novice::LoadTexture("./resource/images/boss/arm.png");
-	int hand = Novice::LoadTexture("./resource/images/boss/hand.png");
-	mGameData.boss.armA1.image.handle = arm;
-	mGameData.boss.armA2.image.handle = arm;
-	mGameData.boss.handA.image.handle = hand;
-	mGameData.boss.armB1.image.handle = arm;
-	mGameData.boss.armB2.image.handle = arm;
-	mGameData.boss.handB.image.handle = hand;
+	mGameData.boss.mainImage.handle = Novice::LoadTexture("./resource/images/boss/test.png");
+	mGameData.boss.armImage.handle = Novice::LoadTexture("./resource/images/boss/arm.png");
+	mGameData.boss.handImage.handle = Novice::LoadTexture("./resource/images/boss/hand.png");
 }
 
 
 void Container::LoadBoss() {
 	float size = (float)mGameData.map.chipSize;
 
-	mGameData.boss.main.image.left = 0;
-	mGameData.boss.main.image.top = 0;
-	mGameData.boss.main.image.width = 512;
-	mGameData.boss.main.image.height = 256;
-	mGameData.boss.main.imageQuad = ToQuad({ {-size * 3.0f, size * 1.5f }, size * 6.0f, size * 3.0f });
-	mGameData.boss.main.position = { 1280,500 };
-	mGameData.boss.main.angle = 0.0f;
-	mGameData.boss.main.scale = 1.0f;
+	// Main
+	mGameData.boss.mainImage.left = 0;
+	mGameData.boss.mainImage.top = 0;
+	mGameData.boss.mainImage.width = 512;
+	mGameData.boss.mainImage.height = 256;
+	mGameData.boss.mainImageQuad = ToQuad({ {-size * 3.0f, size * 1.5f }, size * 6.0f, size * 3.0f });
+	mGameData.boss.position = { 1280,500 };
+	mGameData.boss.angle = 0.0f;
+	mGameData.boss.scale = 1.0f;
 
 
-	// A Arm
-	mGameData.boss.armA1.image.left = 0;
-	mGameData.boss.armA1.image.top = 0;
-	mGameData.boss.armA1.image.width = 256;
-	mGameData.boss.armA1.image.height = 128;
-	mGameData.boss.armA1.imageQuad = ToQuad({ { 0, size * 0.75f }, -size * 3.0f, size * 1.5f });
-	mGameData.boss.armA1.position = { -size * 4, 0 };
-	mGameData.boss.armA1.angle = 0.0f;
-	mGameData.boss.armA1.scale = 1.0f;
+	// Arm
+	mGameData.boss.armImage.left = 0;
+	mGameData.boss.armImage.top = 0;
+	mGameData.boss.armImage.width = 256;
+	mGameData.boss.armImage.height = 128;
+	mGameData.boss.armImageQuad = ToQuad({ { 0, size * 0.75f }, -size * 3.0f, size * 1.5f });
 
-	mGameData.boss.armA2.image.left = 0;
-	mGameData.boss.armA2.image.top = 0;
-	mGameData.boss.armA2.image.width = 256;
-	mGameData.boss.armA2.image.height = 128;
-	mGameData.boss.armA2.imageQuad = ToQuad({ { 0, size * 0.75f }, -size * 3.0f, size * 1.5f });
-	mGameData.boss.armA2.position = { -size * 4, 0 };
-	mGameData.boss.armA2.angle = 0.0f;
-	mGameData.boss.armA2.scale = 1.0f;
+	// Hand
+	mGameData.boss.handImage.left = 0;
+	mGameData.boss.handImage.top = 0;
+	mGameData.boss.handImage.width = 512;
+	mGameData.boss.handImage.height = 512;
+	mGameData.boss.handImageQuad = ToQuad({ { -size * 3.0f, size * 5.0f }, size * 6.0f, size * 6.0f });
 
-	mGameData.boss.handA.image.left = 0;
-	mGameData.boss.handA.image.top = 0;
-	mGameData.boss.handA.image.width = 512;
-	mGameData.boss.handA.image.height = 512;
-	mGameData.boss.handA.imageQuad = ToQuad({ { -size * 3.0f, size * 5.0f }, size * 6.0f, size * 6.0f });
-	mGameData.boss.handA.position = { -size * 5, 0 };
-	mGameData.boss.handA.angle = 0.0f;
-	mGameData.boss.handA.scale = 1.0f;
-
-
-	// B Arm
-	mGameData.boss.armB1.image.left = 256;
-	mGameData.boss.armB1.image.top = 0;
-	mGameData.boss.armB1.image.width = -256;
-	mGameData.boss.armB1.image.height = 128;
-	mGameData.boss.armB1.imageQuad = ToQuad({ { 0, size * 0.75f }, size * 3.0f, size * 1.5f });
-	mGameData.boss.armB1.position = { size * 4, 0 };
-	mGameData.boss.armB1.angle = 0.0f;
-	mGameData.boss.armB1.scale = 1.0f;
-
-	mGameData.boss.armB2.image.left = 256;
-	mGameData.boss.armB2.image.top = 0;
-	mGameData.boss.armB2.image.width = -256;
-	mGameData.boss.armB2.image.height = 128;
-	mGameData.boss.armB2.imageQuad = ToQuad({ { 0, size * 0.75f }, size * 3.0f, size * 1.5f });
-	mGameData.boss.armB2.position = { size * 4, 0 };
-	mGameData.boss.armB2.angle = 0.0f;
-	mGameData.boss.armB2.scale = 1.0f;
-
-	mGameData.boss.handB.image.left = 512;
-	mGameData.boss.handB.image.top = 0;
-	mGameData.boss.handB.image.width = -512;
-	mGameData.boss.handB.image.height = 512;
-	mGameData.boss.handB.imageQuad = ToQuad({ { -size * 3.0f, size * 5.0f }, size * 6.0f, size * 6.0f });
-	mGameData.boss.handB.position = { size * 5, 0 };
-	mGameData.boss.handB.angle = 0.0f;
-	mGameData.boss.handB.scale = 1.0f;
-
+	mGameData.boss.armLength = size * 5.0f;
+	float rootlen = size * 3.0f;
+	mGameData.boss.root[0] = Vec2{-2,1}.Normalized() * rootlen;
+	mGameData.boss.root[1] = Vec2{ 2,1 }.Normalized() * rootlen;
+	mGameData.boss.root[2] = Vec2{ -2,-1 }.Normalized() * rootlen;
+	mGameData.boss.root[3] = Vec2{ 2,-1 }.Normalized() * rootlen;
 }

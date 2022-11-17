@@ -3,7 +3,7 @@
 #include "DataStruct.h"
 #include "Map.h"
 #include "PlayerMain.h"
-#include "BossInitData.h"
+#include "Boss.h"
 
 class Container {
 
@@ -25,7 +25,7 @@ private:
 		Map::InitData map = {};
 
 		Player::InitData player = {};
-		BossInitData boss = {};
+		Boss::InitData boss = {};
 	};
 
 private:
@@ -40,7 +40,7 @@ public:
 	const ParticleData& getParticleData() const { return mGameData.particle; }
 	const Map::InitData& getMapData() const { return mGameData.map; }
 	const Player::InitData& getPlayerData() const { return mGameData.player; }
-	const BossInitData& getBossData() const { return mGameData.boss; }
+	const Boss::InitData& getBossData() const { return mGameData.boss; }
 
 public:
 	Container();

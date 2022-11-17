@@ -63,6 +63,7 @@ public:
 		return vec * mat;
 	}
 
+
 	// ’PˆÊs—ñ
 	static inline Matrix33 MakeIdentity() {
 		return {

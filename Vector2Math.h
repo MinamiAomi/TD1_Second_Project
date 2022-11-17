@@ -205,4 +205,4 @@ public:
 
 };
 
-static const Vec2 kZeroVector2 = { 0.0f, 0.0f };
+static const Vec2 ZeroVector2 = { 0.0f, 0.0f };
