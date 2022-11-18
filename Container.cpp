@@ -70,7 +70,7 @@ void Container::LoadImages() {
 	mGameData.player.image.handle = Novice::LoadTexture("./resource/images/player/test.png");
 	
 	mGameData.boss.mainImage.handle = Novice::LoadTexture("./resource/images/boss/test.png");
-	mGameData.boss.armImage.handle = Novice::LoadTexture("./resource/images/boss/arm.png");
+	mGameData.boss.armImage.handle = Novice::LoadTexture("./resource/images/boss/arm1.png");
 	mGameData.boss.handImage.handle = Novice::LoadTexture("./resource/images/boss/hand.png");
 }
 
@@ -84,18 +84,19 @@ void Container::LoadBoss() {
 	mGameData.boss.mainImage.width = 512;
 	mGameData.boss.mainImage.height = 256;
 	mGameData.boss.mainImageQuad = ToQuad({ {-size * 3.0f, size * 1.5f }, size * 6.0f, size * 3.0f });
-	mGameData.boss.position = { 1280,500 };
+	mGameData.boss.position = { 600,500 };
 	mGameData.boss.angle = 0.0f;
 	mGameData.boss.scale = 1.0f;
 
 
+	mGameData.boss.armLength = size * 5.0f;
+	mGameData.boss.rootLength = size * 3.0f;
 	// Arm
 	mGameData.boss.armImage.left = 0;
 	mGameData.boss.armImage.top = 0;
 	mGameData.boss.armImage.width = 256;
 	mGameData.boss.armImage.height = 128;
-	mGameData.boss.armImageQuad = ToQuad({ { 0, size * 0.75f }, -size * 3.0f, size * 1.5f });
-
+	mGameData.boss.armImageQuad = ToQuad({ { 0, size * 1.25f }, mGameData.boss.armLength + 20, size * 2.5f }).SideFlip();
 	// Hand
 	mGameData.boss.handImage.left = 0;
 	mGameData.boss.handImage.top = 0;
@@ -103,10 +104,8 @@ void Container::LoadBoss() {
 	mGameData.boss.handImage.height = 512;
 	mGameData.boss.handImageQuad = ToQuad({ { -size * 3.0f, size * 5.0f }, size * 6.0f, size * 6.0f });
 
-	mGameData.boss.armLength = size * 5.0f;
-	float rootlen = size * 3.0f;
-	mGameData.boss.root[0] = Vec2{-2,1}.Normalized() * rootlen;
-	mGameData.boss.root[1] = Vec2{ 2,1 }.Normalized() * rootlen;
-	mGameData.boss.root[2] = Vec2{ -2,-1 }.Normalized() * rootlen;
-	mGameData.boss.root[3] = Vec2{ 2,-1 }.Normalized() * rootlen;
+	mGameData.boss.root[0] = Vec2{-2,1}.Normalized() * mGameData.boss.rootLength;
+	mGameData.boss.root[1] = Vec2{ 2,1 }.Normalized() * mGameData.boss.rootLength;
+	mGameData.boss.root[2] = Vec2{ -2,-1 }.Normalized() * mGameData.boss.rootLength;
+	mGameData.boss.root[3] = Vec2{ 2,-1 }.Normalized() * mGameData.boss.rootLength;
 }

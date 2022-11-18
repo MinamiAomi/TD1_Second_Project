@@ -17,13 +17,11 @@ public:
 
 		kArmNum
 	};
-	enum PartId
+	
+	enum BossAttakPattern 
 	{
-		kPartArm1,
-		kPartArm2,
-		kPartHand,
 
-		kPartNum
+
 	};
 
 	struct InitData
@@ -40,6 +38,7 @@ public:
 		float scale;
 
 		float armLength;
+		float rootLength;
 		Vec2 root[kArmNum];
 
 	};
@@ -53,6 +52,8 @@ private:
 
 	Vec2 mTragetPos[kArmNum];
 
+
+	Lerp<Vec2> lerp[kArmNum];
 
 public:
 	Boss(class Game* game);
@@ -68,4 +69,9 @@ public:
 	void SetPosition(const Vec2& pos) { mTransForm.pos = pos; }
 	void SetAngle(float angle) { mTransForm.angle = angle; }
 	void SetScale(float scale) { mTransForm.scale = scale; }
+
+
+private:
+	void IK();
+
 };
