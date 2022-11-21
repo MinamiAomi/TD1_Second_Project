@@ -17,6 +17,10 @@ public:
 		m[2][0] = _31, m[2][1] = _32, m[2][2] = _33;
 	}
 
+	Vec2 GetTrans() const {
+		return { m[2][0],m[2][1] };
+	}
+
 	float Determinant() const {
 		float det = m[0][0] * m[1][1] * m[2][2];
 		det += m[1][0] * m[2][1] * m[0][2];
@@ -52,7 +56,7 @@ public:
 		return *this;
 	}
 
-	friend inline Vec2 operator*(const Vec2& vec, const Matrix33& mat) {
+	friend inline Vec2 operator*(const Vec2& vec, const Matrix33& mat)  {
 		return {
 			vec.x * mat.m[0][0] + vec.y * mat.m[1][0] + 1.0f * mat.m[2][0],
 			vec.x * mat.m[0][1] + vec.y * mat.m[1][1] + 1.0f * mat.m[2][1]

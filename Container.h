@@ -26,6 +26,7 @@ private:
 
 		Player::InitData player = {};
 		Boss::InitData boss = {};
+
 	};
 
 private:
@@ -41,6 +42,8 @@ public:
 	const Map::InitData& getMapData() const { return mGameData.map; }
 	const Player::InitData& getPlayerData() const { return mGameData.player; }
 	const Boss::InitData& getBossData() const { return mGameData.boss; }
+
+
 
 public:
 	Container();

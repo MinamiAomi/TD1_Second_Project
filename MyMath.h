@@ -12,7 +12,6 @@ struct TransForm
 	float angle = 0.0f;
 	float scale = 1.0f;
 
-	Matrix33 mat;
 
 	TransForm* parent = nullptr;
 

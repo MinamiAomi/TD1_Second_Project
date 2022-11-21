@@ -5,12 +5,12 @@
 #include "InputDevice.h"
 #include "DeltaTime.h"
 
-
 #include "Debug.h"
 
 Player::Player(class Game* game) : 
-	GameObject(game) {
-
+	GameObject(game)
+{
+	mJumpEffect.resize(CONTAINER->getPlayerData().jumpEffectNum, game);
 }
 
 
@@ -27,6 +27,10 @@ void Player::Create() {
 	mSize = CONTAINER->getPlayerData().size;
 	mImageRect = Rect::CreateCenter(mSize);
 	mMapColliderRect = Rect::CreateCenter(CONTAINER->getPlayerData().mapColliderSize);
+
+	for (auto& it : mJumpEffect) {
+		it.Create();
+	}
 }
 
 void Player::Update() {
@@ -35,10 +39,22 @@ void Player::Update() {
 
 	Move();
 	StateUpdate();
-
+	for (auto& it : mJumpEffect) {
+		if (it.getIsAlive()) {
+			it.Update();
+		}
+	}
 }
 
 void Player::Draw() {
+
+
+
+	for (auto& it : mJumpEffect) {
+		if (it.getIsAlive()) {
+			it.Draw();
+		}
+	}
 
 	if (mIsRightDirection) {
 	CAMERA->DrawSpriteRect(mImageRect.Translation(mPosition), CONTAINER->getPlayerData().image);
@@ -157,18 +173,34 @@ void Player::NormalState() {
 
 	mAcceleration.x = CONTAINER->getPlayerData().movementJerk * mMoveInput;
 
+	// ジャンプ
 	if (mJumpInput && mIsGround && mIsJump == false) {
 		mIsJump = true;
 		mJumpInputRelease = false;
 		mAcceleration.y += CONTAINER->getPlayerData().jumpForce;
+		for (auto& it : mJumpEffect) {
+			if (it.getIsAlive() == false) {
+				it.Spawn(mPosition);
+				break;
+			}
+		}
 	}
+	// 二段ジャンプ
 	if (mJumpInput && mIsGround == false && mIsDoubleJump == false && mJumpInputRelease == true) {
 		mIsDoubleJump = true;
 		mAcceleration.y = CONTAINER->getPlayerData().jumpForce;
+		for (auto& it : mJumpEffect) {
+			if (it.getIsAlive() == false) {
+				it.Spawn(mPosition);
+				break;
+			}
+		}
 	}
+	// 重力
 	if (mIsGround == false) {
 		mAcceleration.y += CONTAINER->getPlayerData().gravity;
 	}
+	// ダッシュ攻撃
 	if (mDushAttakInput && mDushCoolTime <= 0.0f) {
 		mIsDushAttak = true;
 		if (mDushAttakDirectionInput.IsZero()) {

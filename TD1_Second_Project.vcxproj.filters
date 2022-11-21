@@ -146,6 +146,9 @@
     <Filter Include="GameObject\Boss\Parts\Base">
       <UniqueIdentifier>{d10ce618-336a-460b-b3fa-fa9c52bc82e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Effect\PlayerJumpEffect">
+      <UniqueIdentifier>{f8381164-f086-4b2d-ae1f-aafaac3b9224}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -224,8 +227,8 @@
     <ClCompile Include="Boss.cpp">
       <Filter>GameObject\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="BossPart.cpp">
-      <Filter>GameObject\Boss\Parts\Base</Filter>
+    <ClCompile Include="PlayerJumpEffect.cpp">
+      <Filter>GameObject\Effect\PlayerJumpEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -421,8 +424,8 @@
     <ClInclude Include="Boss.h">
       <Filter>GameObject\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="BossPart.h">
-      <Filter>GameObject\Boss\Parts\Base</Filter>
+    <ClInclude Include="PlayerJumpEffect.h">
+      <Filter>GameObject\Effect\PlayerJumpEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

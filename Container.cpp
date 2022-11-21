@@ -29,7 +29,7 @@ void Container::LoadData() {
 	mGameData.map.fileName = "./resource/text/map.csv";
 	mGameData.map.chipImageSize = 32;
 	mGameData.map.chipSize = 32;
-	mGameData.map.chipRowNum = 120;
+	mGameData.map.chipRowNum = 80;
 	mGameData.map.chipColmunNum = 33;
 	mGameData.map.mapWidth = mGameData.map.chipSize * mGameData.map.chipRowNum;
 	mGameData.map.mapHeight = mGameData.map.chipSize * mGameData.map.chipColmunNum;
@@ -58,20 +58,34 @@ void Container::LoadData() {
 	mGameData.player.dushAttakSpeed = 4000.0f;
 	mGameData.player.dushAttakDistance = 300.0f;
 	mGameData.player.dushAttakCoolTime = 1.5f;
+	
+	mGameData.player.jumpEffectNum = 2;
+
+	float size = 12.0f;
+	mGameData.effect.jumpEffect.imageQuad = ToQuad({{-size / 2.0f,size / 2.0f},size , size}) ;
+	mGameData.effect.jumpEffect.particleNum = 12;
+	mGameData.effect.jumpEffect.exitTime = 0.1f;
+	mGameData.effect.jumpEffect.pariticleSpeed = 500.0f;
+
+	mGameData.particle.normal = { 0,0,0,128,128 };
 
 	LoadBoss();
 }
 
 void Container::LoadImages() {
 	mGameData.particle.fadeStraight.image.handle = Novice::LoadTexture("./resource/images/effect/partical2.png");
+	mGameData.particle.normal.handle = mGameData.particle.fadeStraight.image.handle;
 	mGameData.map.chipImageHandle[kChipTypeNone] = -1;
 	mGameData.map.chipImageHandle[kChipTypeBlock] = Novice::LoadTexture("./resource/images/map/chipBlock.png");
 
 	mGameData.player.image.handle = Novice::LoadTexture("./resource/images/player/test.png");
 	
-	mGameData.boss.mainImage.handle = Novice::LoadTexture("./resource/images/boss/test.png");
-	mGameData.boss.armImage.handle = Novice::LoadTexture("./resource/images/boss/arm1.png");
-	mGameData.boss.handImage.handle = Novice::LoadTexture("./resource/images/boss/hand.png");
+	mGameData.boss.mainImage.handle = Novice::LoadTexture("./resource/images/boss/body.png");
+	mGameData.boss.arm1Image.handle = Novice::LoadTexture("./resource/images/boss/arm1.png");
+	mGameData.boss.arm2Image.handle = Novice::LoadTexture("./resource/images/boss/arm2.png");
+	mGameData.boss.swordHandImage.handle = Novice::LoadTexture("./resource/images/boss/sword.png");
+	mGameData.boss.gunHandImage.handle = Novice::LoadTexture("./resource/images/boss/gun.png");
+	mGameData.boss.headImage.handle = Novice::LoadTexture("./resource/images/boss/head.png");
 }
 
 
@@ -81,28 +95,47 @@ void Container::LoadBoss() {
 	// Main
 	mGameData.boss.mainImage.left = 0;
 	mGameData.boss.mainImage.top = 0;
-	mGameData.boss.mainImage.width = 512;
+	mGameData.boss.mainImage.width = 256;
 	mGameData.boss.mainImage.height = 256;
-	mGameData.boss.mainImageQuad = ToQuad({ {-size * 3.0f, size * 1.5f }, size * 6.0f, size * 3.0f });
-	mGameData.boss.position = { 600,500 };
+	mGameData.boss.mainImageQuad = ToQuad({ {-size * 4.0f, size * 4.0f }, size * 8.0f, size * 8.0f });
+	mGameData.boss.position = { 1200,500 };
 	mGameData.boss.angle = 0.0f;
 	mGameData.boss.scale = 1.0f;
 
+	float scale = mGameData.boss.scale;
 
-	mGameData.boss.armLength = size * 5.0f;
-	mGameData.boss.rootLength = size * 3.0f;
+	mGameData.boss.armLength = size * 5.0f * scale;
+	mGameData.boss.rootLength = size * 3.0f * scale;
 	// Arm
-	mGameData.boss.armImage.left = 0;
-	mGameData.boss.armImage.top = 0;
-	mGameData.boss.armImage.width = 256;
-	mGameData.boss.armImage.height = 128;
-	mGameData.boss.armImageQuad = ToQuad({ { 0, size * 1.25f }, mGameData.boss.armLength + 20, size * 2.5f }).SideFlip();
+	mGameData.boss.arm1Image.left = 0;
+	mGameData.boss.arm1Image.top = 0;
+	mGameData.boss.arm1Image.width = 256;
+	mGameData.boss.arm1Image.height = 128;
+	mGameData.boss.arm2Image.left = 0;
+	mGameData.boss.arm2Image.top = 0;
+	mGameData.boss.arm2Image.width = 256;
+	mGameData.boss.arm2Image.height = 128;
+	mGameData.boss.armImageQuad = ToQuad({ Vec2{ 0, size * 1.25f } *scale, (mGameData.boss.armLength + 18) * scale, size * 2.5f * scale }).SideFlip();
+
+	float handScale = 0.7f;
 	// Hand
-	mGameData.boss.handImage.left = 0;
-	mGameData.boss.handImage.top = 0;
-	mGameData.boss.handImage.width = 512;
-	mGameData.boss.handImage.height = 512;
-	mGameData.boss.handImageQuad = ToQuad({ { -size * 3.0f, size * 5.0f }, size * 6.0f, size * 6.0f });
+	mGameData.boss.swordHandImage.left = 0;
+	mGameData.boss.swordHandImage.top = 0;
+	mGameData.boss.swordHandImage.width = 256;
+	mGameData.boss.swordHandImage.height = 128;
+	mGameData.boss.swordHandImageQuad = ToQuad({ { -size * 3.0f * scale * handScale, size * 3.0f * scale * handScale}, size * 12.0f * scale * handScale, size * 6.0f * scale * handScale }).SideFlip();
+
+
+	mGameData.boss.gunHandImage.left = 0;
+	mGameData.boss.gunHandImage.top = 0;
+	mGameData.boss.gunHandImage.width = 128;
+	mGameData.boss.gunHandImage.height = 128;
+	mGameData.boss.gunHandImageQuad = ToQuad({ { -size * 3.0f * scale * handScale, size * 3.0f * scale * handScale}, size * 6.0f * scale * handScale, size * 6.0f * scale * handScale }).SideFlip();
+
+	mGameData.boss.headImage = { 0,0,0,128,128 };
+	mGameData.boss.headImageQuad = ToQuad({ {-size * 3.0f * scale, size * 3.0f * scale },size * 6 * scale,size * 6 * scale });
+	mGameData.boss.headPos = { 0,size * 4.0f * scale };
+
 
 	mGameData.boss.root[0] = Vec2{-2,1}.Normalized() * mGameData.boss.rootLength;
 	mGameData.boss.root[1] = Vec2{ 2,1 }.Normalized() * mGameData.boss.rootLength;

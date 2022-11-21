@@ -18,20 +18,28 @@ public:
 		kArmNum
 	};
 	
-	enum BossAttakPattern 
+	enum MovePattern
 	{
+		kWait,
+		kArmAttack,
+		kSpinAttack,
 
-
+		kMovePattern
 	};
 
 	struct InitData
 	{
 		ImageData mainImage;
-		ImageData armImage;
-		ImageData handImage;
+		ImageData arm1Image;
+		ImageData arm2Image;
+		ImageData swordHandImage;
+		ImageData gunHandImage;
+		ImageData headImage;
 		Quad mainImageQuad;
 		Quad armImageQuad;
-		Quad handImageQuad;
+		Quad swordHandImageQuad;
+		Quad gunHandImageQuad;
+		Quad headImageQuad;
 
 		Vec2 position;
 		float angle;
@@ -40,7 +48,7 @@ public:
 		float armLength;
 		float rootLength;
 		Vec2 root[kArmNum];
-
+		Vec2 headPos;
 	};
 
 private:
@@ -49,11 +57,12 @@ private:
 	TransForm mArm1[kArmNum] = {};
 	TransForm mArm2[kArmNum] = {};
 	TransForm mHand[kArmNum] = {};
-
+	float mWaponAngle[kArmNum] = {};
+	Lerp<Vec2> mTragetLerp[kArmNum];
 	Vec2 mTragetPos[kArmNum];
 
+	MovePattern mCurrentPattern = kWait;
 
-	Lerp<Vec2> lerp[kArmNum];
 
 public:
 	Boss(class Game* game);
@@ -72,6 +81,10 @@ public:
 
 
 private:
+
+	void Wait();
+	void ArmAttack();
+	void SpinAttack();
 	void IK();
 
 };

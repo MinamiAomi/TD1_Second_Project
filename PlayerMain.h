@@ -3,6 +3,8 @@
 #include "MyMath.h"
 #include "Shape.h"
 #include "ImageData.h"
+#include <vector>
+#include "PlayerJumpEffect.h"
 
 class Player :
     public GameObject
@@ -37,6 +39,8 @@ public:
         float dushAttakSpeed; // ダッシュ攻撃の速度
         float dushAttakDistance; // ダッシュ攻撃の距離
         float dushAttakCoolTime; // ダッシュ攻撃のクールタイム
+
+        int jumpEffectNum;
     };
 
 private:
@@ -71,6 +75,8 @@ private:
     Vec2 mDushAttakStartPosition;
     float mDushCoolTime = 0.0f;
 
+    std::vector<PlayerJumpEffect> mJumpEffect;
+
 public:
     Player(class Game* game);
     ~Player();
@@ -88,6 +94,7 @@ public:
     void setVelocity(const Vec2& vel) { mVelocity = vel; }
     const Rect& mapColliderRect() const { return mMapColliderRect; }
 
+    
     const Vec2& getDashAttakDirection() const { return mDushAttakDirectionInput; }
     
     void WallKick(int i); // 方向

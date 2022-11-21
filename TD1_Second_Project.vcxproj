@@ -93,7 +93,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boss.cpp" />
-    <ClCompile Include="BossPart.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\TextureManager.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\WinApp.cpp" />
@@ -116,6 +115,7 @@
     <ClCompile Include="NormalEffect.cpp" />
     <ClCompile Include="FadeStraightParticle.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="PlayerJumpEffect.cpp" />
     <ClCompile Include="PlayerMain.cpp" />
     <ClCompile Include="SizeComponent.cpp" />
     <ClCompile Include="TitleScene.cpp" />
@@ -128,7 +128,6 @@
     <ClInclude Include="..\DirectXGame\math\Vector4.h" />
     <ClInclude Include="Array.h" />
     <ClInclude Include="Boss.h" />
-    <ClInclude Include="BossPart.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\CircleShadow.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\DebugCamera.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\DirectionalLight.h" />
@@ -178,6 +177,7 @@
     <ClInclude Include="FadeStraightParticle.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleComponent.h" />
+    <ClInclude Include="PlayerJumpEffect.h" />
     <ClInclude Include="PlayerMain.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shape.h" />
