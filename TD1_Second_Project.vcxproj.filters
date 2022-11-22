@@ -149,6 +149,9 @@
     <Filter Include="GameObject\Effect\PlayerJumpEffect">
       <UniqueIdentifier>{f8381164-f086-4b2d-ae1f-aafaac3b9224}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\Collision">
+      <UniqueIdentifier>{73ce76cc-5077-4b00-875b-764337cbb00e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -426,6 +429,9 @@
     </ClInclude>
     <ClInclude Include="PlayerJumpEffect.h">
       <Filter>GameObject\Effect\PlayerJumpEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>System\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

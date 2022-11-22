@@ -65,7 +65,7 @@ void Boss::Update() {
 	IK();
 
 	// ƒvƒŒƒCƒ„[‚ÉŒü‚¯‚é
-	Vec2 ppos = mTransForm.pos;
+	Vec2 ppos = PLAYER->getPosition();
 	Vec2 bossPos = mTransForm.pos;
 	for (int i = 0; i < kArmNum; i++) {
 

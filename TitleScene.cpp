@@ -32,9 +32,9 @@ void TitleScene::Update()
 
 	if (MOUSE->IsTrigger(kMouseButtonLeft)) {
 		getGame()->getEffectManager()->getNormalEffect()->Create(
-			7,
+			200,
 			getGame()->getInput()->getMouse()->getPosition(),
-			1000, 32, 32,Math::ToRadians((float)Func::Random(0,360)), 0.1f);
+			1000, 300, 300,Math::ToRadians((float)Func::Random(0,360)), 11000.0f);
 	}
 
 	

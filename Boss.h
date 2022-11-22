@@ -23,6 +23,7 @@ public:
 		kWait,
 		kArmAttack,
 		kSpinAttack,
+		kLaserAttack,
 
 		kMovePattern
 	};

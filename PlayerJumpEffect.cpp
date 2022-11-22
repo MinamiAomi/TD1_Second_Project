@@ -28,7 +28,7 @@ void PlayerJumpEffect::Spawn(const Vec2& spawnPos)
 	mEmitterPos = spawnPos;
 	mLeftTime = CONTAINER->getEffectData().jumpEffect.exitTime;
 
-	float x = 2.0f * Math::Pi / mParticles.size();
+	float x = -Math::Pi / mParticles.size();
 	float spe = CONTAINER->getEffectData().jumpEffect.pariticleSpeed;
 	for (int i = 0; i < mParticles.size(); i++) {
 		mParticles[i].pos = mEmitterPos;

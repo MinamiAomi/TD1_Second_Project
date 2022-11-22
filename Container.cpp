@@ -100,7 +100,7 @@ void Container::LoadBoss() {
 	mGameData.boss.mainImageQuad = ToQuad({ {-size * 4.0f, size * 4.0f }, size * 8.0f, size * 8.0f });
 	mGameData.boss.position = { 1200,500 };
 	mGameData.boss.angle = 0.0f;
-	mGameData.boss.scale = 1.0f;
+	mGameData.boss.scale = 1.7f;
 
 	float scale = mGameData.boss.scale;
 
@@ -115,7 +115,7 @@ void Container::LoadBoss() {
 	mGameData.boss.arm2Image.top = 0;
 	mGameData.boss.arm2Image.width = 256;
 	mGameData.boss.arm2Image.height = 128;
-	mGameData.boss.armImageQuad = ToQuad({ Vec2{ 0, size * 1.25f } *scale, (mGameData.boss.armLength + 18) * scale, size * 2.5f * scale }).SideFlip();
+	mGameData.boss.armImageQuad = ToQuad({ Vec2{ 0, size * 1.25f } *scale, (mGameData.boss.armLength +18 * scale), size * 2.5f * scale }).SideFlip();
 
 	float handScale = 0.7f;
 	// Hand
@@ -133,8 +133,8 @@ void Container::LoadBoss() {
 	mGameData.boss.gunHandImageQuad = ToQuad({ { -size * 3.0f * scale * handScale, size * 3.0f * scale * handScale}, size * 6.0f * scale * handScale, size * 6.0f * scale * handScale }).SideFlip();
 
 	mGameData.boss.headImage = { 0,0,0,128,128 };
-	mGameData.boss.headImageQuad = ToQuad({ {-size * 3.0f * scale, size * 3.0f * scale },size * 6 * scale,size * 6 * scale });
-	mGameData.boss.headPos = { 0,size * 4.0f * scale };
+	mGameData.boss.headImageQuad = ToQuad({ {-size * 3.0f, size * 3.0f },size * 6,size * 6 });
+	mGameData.boss.headPos = { 0,size * 4.0f };
 
 
 	mGameData.boss.root[0] = Vec2{-2,1}.Normalized() * mGameData.boss.rootLength;

@@ -25,7 +25,7 @@ void Camera::Create() {
 }
 
 void Camera::Update() {
-	Vec2 ppos = BOSS->GetPosition();
+	Vec2 ppos = PLAYER->getPosition();
 	mWorldPosition = ppos;
 	mWorldPosition.x = Math::Clamp<float>(mWorldPosition.x, CAMERA_DATA.scrollMin.x, CAMERA_DATA.scrollMax.x);
 	mWorldPosition.y = Math::Clamp<float>(mWorldPosition.y, CAMERA_DATA.scrollMin.y, CAMERA_DATA.scrollMax.y);

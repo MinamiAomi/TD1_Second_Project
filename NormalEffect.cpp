@@ -48,7 +48,7 @@ void NormalEffect::Update() {
 			it.Update();
 			allAlive = true;
 		}
-	}
+	} 
 	if (allAlive == false && mParticles.size() != 0) {
 		mParticles.Delete();
 	}
