@@ -45,7 +45,7 @@ void Map::Draw() {
 				getGame()->getCamera()->DrawSprite(
 					{ (float)(MAP_DATA.chipSize * raw),  (float)(MAP_DATA.mapHeight - (MAP_DATA.chipSize * col)) },
 					MAP_DATA.chipImageHandle[mMapData.at(col, raw)],
-					mChipScale);
+					mChipScale,0x337733FF);
 			}
 		}
 	}

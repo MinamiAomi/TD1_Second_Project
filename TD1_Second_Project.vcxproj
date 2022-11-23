@@ -92,7 +92,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Back.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossArmBullet.cpp" />
+    <ClCompile Include="BossArmBulletManager.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\TextureManager.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\WinApp.cpp" />
@@ -101,6 +104,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="FadeAlphaComponent.cpp" />
     <ClCompile Include="Func.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -114,7 +118,9 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="NormalEffect.cpp" />
     <ClCompile Include="FadeStraightParticle.cpp" />
+    <ClCompile Include="OptionScene.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="PlayerDushAttack.cpp" />
     <ClCompile Include="PlayerJumpEffect.cpp" />
     <ClCompile Include="PlayerMain.cpp" />
     <ClCompile Include="SizeComponent.cpp" />
@@ -127,7 +133,10 @@
     <ClInclude Include="..\DirectXGame\math\Vector3.h" />
     <ClInclude Include="..\DirectXGame\math\Vector4.h" />
     <ClInclude Include="Array.h" />
+    <ClInclude Include="Back.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossArmBullet.h" />
+    <ClInclude Include="BossArmBulletManager.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\CircleShadow.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\DebugCamera.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\DirectionalLight.h" />
@@ -156,6 +165,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="DataStruct.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="FadeAlphaComponent.h" />
     <ClInclude Include="Func.h" />
     <ClInclude Include="Container.h" />
@@ -176,8 +186,10 @@
     <ClInclude Include="Matrix33.h" />
     <ClInclude Include="NormalEffect.h" />
     <ClInclude Include="FadeStraightParticle.h" />
+    <ClInclude Include="OptionScene.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleComponent.h" />
+    <ClInclude Include="PlayerDushAttack.h" />
     <ClInclude Include="PlayerJumpEffect.h" />
     <ClInclude Include="PlayerMain.h" />
     <ClInclude Include="Scene.h" />

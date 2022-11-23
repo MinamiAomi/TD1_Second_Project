@@ -12,7 +12,10 @@
 #define CAMERA getGame()->getCamera()
 #define MAP getGame()->getMap()
 #define PLAYER getGame()->getPlayer()
+#define PLAYER_DATA getGame()->getContainer()->getPlayerData()
+
 #define BOSS getGame()->getBoss()
+#define BOSS_DATA getGame()->getContainer()->getBossData()
 
 #endif // !ACCESS_PTR
 

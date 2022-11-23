@@ -132,6 +132,9 @@ public:
 	Quad TransForm(const Matrix33& mat) const {
 		return { leftTop * mat,rightTop * mat, leftBottom * mat, rightBottom * mat };
 	}
+	Quad TransForm(const Vec2& vec) const {
+		return { leftTop + vec,rightTop + vec, leftBottom + vec, rightBottom + vec };
+	}
 	Quad TransForm(const Vec2& vec, float angle) const {
 		Matrix33 mat = Matrix33::MakeRotation(angle) * Matrix33::MakeTranslation(vec);
 		return { leftTop * mat,rightTop * mat, leftBottom * mat, rightBottom * mat };

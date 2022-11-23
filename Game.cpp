@@ -7,11 +7,14 @@
 #include "Scene.h"
 #include "TitleScene.h"
 #include "MainScene.h"
+#include "OptionScene.h"
 #include "Camera.h"
 #include "EffectManager.h"
 #include "Map.h"
 #include "PlayerMain.h"
 #include "Boss.h"
+#include "Back.h"
+#include "Fade.h"
 
 #ifdef _DEBUG
 #include "Debug.h"
@@ -36,6 +39,16 @@ void Game::Run() {
 		// ƒtƒŒ[ƒ€‚ÌŠJŽn
 		Novice::BeginFrame();
 		mInput->SetState();
+
+		if (mInput->getKey()->isTrigger(DIK_M)) {
+			IsFullScreen ^= true;
+			if (IsFullScreen) {
+				Novice::SetWindowMode(kFullscreen);
+			}
+			else {
+				Novice::SetWindowMode(kWindowed);
+			}
+		}
 #ifdef _DEBUG
 		mCamera->debugMousePosition();
 #endif
@@ -60,6 +73,8 @@ void Game::Run() {
 #endif // _DEBUG
 
 		mScenes[mCurrentSceneId]->Proc();
+		mFade->Update();
+		mFade->Draw();
 
 #ifdef _DEBUG
 		if (_debugMode) {
@@ -97,17 +112,24 @@ void Game::Initialize() {
 
 	mScenes[kTitleScene] = mTitleScenePtr = new TitleScene(this);
 	mScenes[kMainScene] = mMainScenePtr = new MainScene(this);
+	mScenes[kOption] = mOptionScenePtr = new OptionScene(this);
 
 	mCamera = new Camera(this);
 	mEffectManager = new EffectManager(this);
 	mMap = new Map(this);
 	mPlayer = new Player(this);
 	mBoss = new Boss(this);
+	mBack = new Back(this);
+	mFade = new Fade(this);
 	// ”wŒi‚Í•
 	Novice::SetClearColor(mContainer->getWindow().kClearColor);
 }
 
 void Game::Finalize() {
+
+
+	Func::SafeDelete(mFade);
+	Func::SafeDelete(mBack);
 	Func::SafeDelete(mBoss);
 	Func::SafeDelete(mPlayer);
 	Func::SafeDelete(mMap);
@@ -115,6 +137,7 @@ void Game::Finalize() {
 	Func::SafeDelete(mCamera);
 	mTitleScenePtr = nullptr;
 	mMainScenePtr = nullptr;
+	mOptionScenePtr = nullptr;
 	for (auto scene : mScenes) {
 		Func::SafeDelete(scene);
 	}

@@ -19,8 +19,13 @@ public:
 		return (a.position - b.position).LengthSquare() <= rad * rad;
 	}
 	static bool RectRect(const Rect& a, const Rect& b) {
+		bool A = a.Left() < b.Right();
+		bool B = b.Left() < a.Right();
+		bool C = a.Top() > b.Bottom();
+		bool D = b.Top() > a.Bottom();
+
 		return a.Left() < b.Right() && b.Left() < a.Right() &&
-			a.Top() < b.Bottom() && b.Top() < a.Bottom();
+			a.Top() > b.Bottom() && b.Top() > a.Bottom();
 	}
 	/*static bool RectCircle(const Rect& a, const Circle& b) {
 		float bottom = a.Bottom();

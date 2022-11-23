@@ -33,6 +33,13 @@ public:
 		mAnimeFrameNum(afn), mIntervalSecond(ins), mIsLoop(loop) {}
 	~Animation() {}
 
+	void Init(int afn, float ins, bool loop = true) {
+		mAnimeFrameNum = afn;
+		mIntervalSecond = ins;
+		mIsLoop = loop;
+		Start();
+	}
+
 	void Start() {
 		mSwitchSecond = mIntervalSecond;
 		mCurrentFrame = 0;
@@ -48,7 +55,7 @@ public:
 				mSwitchSecond = mIntervalSecond;
 				mCurrentFrame++;
 				if (mCurrentFrame >= mAnimeFrameNum) {
-					if (isLoop) {
+					if (mIsLoop == true) {
 						mCurrentFrame = 0;
 					}
 					else {

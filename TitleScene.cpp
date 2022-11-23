@@ -8,6 +8,11 @@
 #include "Func.h"
 #include "PlayerMain.h"
 #include "Boss.h"
+#include "Collision.h"
+#include "Back.h"
+#include "Container.h"
+#include "MyMath.h"
+#include "Fade.h"
 
 #ifdef _DEBUG
 #include "Debug.h"
@@ -21,39 +26,44 @@ void TitleScene::Create()
 
 void TitleScene::Init()
 {
+	mIsFead = false;
 }
 
 void TitleScene::Update()
 {
-	MAP->Update();
 
-	PLAYER->Update();
-	BOSS->Update();
-
-	if (MOUSE->IsTrigger(kMouseButtonLeft)) {
-		getGame()->getEffectManager()->getNormalEffect()->Create(
-			200,
-			getGame()->getInput()->getMouse()->getPosition(),
-			1000, 300, 300,Math::ToRadians((float)Func::Random(0,360)), 11000.0f);
+	if (getGame()->getFade()->End()) {
+		if (KEY->isTrigger(DIK_SPACE) || CONTROLLER->isPressed(0, kControllerButtonA)) {
+			mIsGameStart = true;
+			getGame()->getFade()->Start();
+		}
+		if (KEY->isTrigger(DIK_LSHIFT) || CONTROLLER->isPressed(0, kControllerButtonY)) {
+			mIsGameStart = false;
+			getGame()->getFade()->Start();
+		}
 	}
 
-	
-
-
-	getGame()->getEffectManager()->Update();
 	getGame()->getCamera()->Update();
 }
 
 void TitleScene::Draw() {
-	MAP->Draw();
-	BOSS->Draw();
-	PLAYER->Draw();
-	getGame()->getEffectManager()->getNormalEffect()->Draw();
+	
+	Novice::DrawSprite(0, 0, CONTAINER->getTitleData().backImage.handle, 1.0f, 1.0f, 0.0f, 0xFFFFFFFF);
+	static float angle = 0.0f;
+	angle += Math::ToRadians(1.0f);
+	float siny = Math::Sin(angle) * 50;
+	Novice::DrawSprite(0, 550 + siny, CONTAINER->getTitleData().logoImage.handle, 1.0f, 1.0f, 0.0f, 0xFFFFFFFF);
+	Novice::DrawSprite(0, 450 + siny, CONTAINER->getTitleData().logoYImage.handle, 1.0f, 1.0f, 0.0f, 0xFFFFFFFF);
 
 }
 
 void TitleScene::NextScene() {
-	if (KEY->isTrigger(DIK_T)) {
-		getGame()->ChangeScene(Game::kMainScene);
+	if (getGame()->getFade()->Swich()) {
+		if (mIsGameStart == true) {
+			getGame()->ChangeScene(Game::kMainScene);
+		}
+		else {
+			getGame()->ChangeScene(Game::kOption);
+		}
 	}
 }

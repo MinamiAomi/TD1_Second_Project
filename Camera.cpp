@@ -47,8 +47,8 @@ void Camera::Update() {
 			mWorldPosition += (dPreMousePosition - dCurMousePosition) / mScale;
 		}
 
-#endif // _DEBUG
 	}
+#endif // _DEBUG
 
 	
 	if (mScale < kScaleMin) {
@@ -94,8 +94,8 @@ void Camera::debugMousePosition() {
 
 	dPreMousePosition = dCurMousePosition;
 	dCurMousePosition = { tmp.x, (tmp.y - 720) * -1 };
-#endif // _DEBUG
 }
+#endif // _DEBUG
 
 void Camera::DrawCircle(const Circle& circle, unsigned int color, FillMode fillmode )  const {
 	Vec2 center(circle.position * mMatrix);
@@ -160,7 +160,7 @@ void Camera::DrawSpriteRect(const RectAngle& rectangle, const ImageData& image, 
 		image.handle, -(rectangle.theta + mTheta), color);
 }
 
-void Camera::DrawQuad(const Quad& quad, const ImageData& image, unsigned int color) const {
+void Camera::DrawQuad(const Quad& quad, const ImageData& image, unsigned int color, int animeCount) const {
 	constexpr int kVertexNum = 4;
 	Vec2 vert[kVertexNum] = {
 		quad.leftTop * mMatrix,
@@ -172,6 +172,6 @@ void Camera::DrawQuad(const Quad& quad, const ImageData& image, unsigned int col
 		(int)vert[1].x, (int)vert[1].y,
 		(int)vert[2].x, (int)vert[2].y,
 		(int)vert[3].x, (int)vert[3].y,
-		image.left, image.top, image.width, image.height,
+		image.left + image.width * animeCount, image.top, image.width, image.height,
 		image.handle, color);
 }

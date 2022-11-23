@@ -6,11 +6,14 @@ public:
 	enum SceneId {
 		kTitleScene,
 		kMainScene,
+		kOption,
 
 		kSceneIdNum
 	};
 
 private:
+
+	bool IsFullScreen = true;
 
 	class Container* mContainer = nullptr; // コンテナ
 	class InputDevice* mInput = nullptr;
@@ -20,12 +23,15 @@ private:
 	class Scene* mScenes[kSceneIdNum] = { nullptr }; // シーン
 	class TitleScene* mTitleScenePtr = nullptr; // タイトルシーンポインタ
 	class MainScene* mMainScenePtr = nullptr; // メインシーンポインタ
+	class OptionScene* mOptionScenePtr = nullptr; // 設定シーンポインタ
 
 	class Camera* mCamera = nullptr;
 	class EffectManager* mEffectManager = nullptr;
 	class Map* mMap = nullptr;
 	class Player* mPlayer = nullptr;
 	class Boss* mBoss = nullptr;
+	class Back* mBack = nullptr;
+	class Fade* mFade = nullptr;
 	// ゲッター類
 public:
 
@@ -43,6 +49,8 @@ public:
 	class Map* getMap() { return mMap; }
 	class Player* getPlayer() { return mPlayer; }
 	class Boss* getBoss() { return mBoss; }
+	class Back* getBack() { return mBack; }
+	class Fade* getFade() { return mFade; }
 
 public:
 	Game();

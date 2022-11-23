@@ -68,7 +68,7 @@ public:
 	void DrawSprite(const Vec2& lefttop, int texturehandle, float scale, unsigned int color = WHITE) const;
 	void DrawSpriteRect(const Rect& rect, const ImageData& image, unsigned int color = WHITE) const;
 	void DrawSpriteRect(const RectAngle& rectangle, const ImageData& image, unsigned int color = WHITE) const;
-	void DrawQuad(const Quad& quad, const ImageData& image, unsigned int color = WHITE) const;
+	void DrawQuad(const Quad& quad, const ImageData& image, unsigned int color = WHITE, int animeCount = 0) const;
 
 #ifdef _DEBUG
 	void debugMousePosition();
